@@ -7,8 +7,9 @@ Diseño UI/Interactividad: Walter Paredes
 
 Frontend/Interactividad: Hernán Silva
 
-Proveer una plataforma web funcional que permita comparar precios en categorías no cubiertas por SoloTodo.
 
-Garantizar un mínimo de 3 o más enlaces a tiendas/sitios externos por cada categoría en la demo.
+*OBJ-1: Proveer una plataforma web funcional que permita comparar precios en categorías no cubiertas por SoloTodo.
 
-Facilitar la búsqueda y filtrado ágil por categoría, rango de precios y condición (Nuevo / Usado).
+*OBJ-2: Garantizar un mínimo de 3 o más enlaces a tiendas/sitios externos por cada categoría en la demo.
+
+*OBJ-3: Facilitar la búsqueda y filtrado ágil por categoría, rango de precios y condición (Nuevo / Usado).
