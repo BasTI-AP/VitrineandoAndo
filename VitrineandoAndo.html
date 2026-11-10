@@ -1,11 +1,358 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>VitrineandoAndo.cl</title>
+	<title>VitrineandoAndo</title>
+	
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+	
+	<style>
+		body 
+		{
+			background-color: #E7E9EA; 
+
+		}
+
+		.bg-night {
+			background-color: #252850 !important; 
+		}
+
+		.titulo-intercalado {
+			font-family: 'Black Ops One', cursive !important;
+		}
+
+		/* Púrpura */
+		.titulo-intercalado span:nth-child(odd) {
+			color: #6C5CE7;
+			text-shadow: 3px 3px 6px rgba(45, 20, 90, 0.4);
+		}
+
+		/* Naranja claro */
+		.titulo-intercalado span:nth-child(even) {
+			color: #F39C12;
+			text-shadow: 3px 3px 6px rgba(150, 75, 0, 0.4);
+		}
+
+		.subtitulo-marca {
+			margin-top: -12px;
+			font-size: 0.95rem;
+			color: #6c757d;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+
+		/* Estilos para la Sección Categorías (los cuadraos) */
+		.card-categoria-full {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 14px;
+			text-align: center;
+			padding: 30px 15px;
+			text-decoration: none;
+			color: #1e293b;
+			transition: all 0.25s ease-in-out;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+		}
+
+		.card-categoria-full:hover {
+			border-color: #6C5CE7;
+			transform: translateY(-5px);
+			box-shadow: 0 12px 24px rgba(108, 92, 231, 0.18);
+			color: #6C5CE7;
+		}
+
+		.card-categoria-full span.icono {
+			font-size: 42px;
+			display: block;
+			margin-bottom: 12px;
+		}
+
+		.card-categoria-full span.texto {
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.8px;
+		}
+
+		/* Clase para ocultar secciones desactivadas */
+		.seccion-oculta {
+			display: none !important;
+		}
+	</style>
 </head>
 <body>
 
+	<div class="container mt-5">
+		<!-- Contenedor del título -->
+		<div class="d-inline-flex flex-column align-items-center mb-3">
+			<h1 class="titulo-intercalado display-1 fw-bolder mb-0">
+				<span>V</span><span>i</span><span>t</span><span>r</span><span>i</span><span>n</span><span>e</span><span>a</span><span>n</span><span>d</span><span>o</span><span>A</span><span>n</span><span>d</span><span>o</span>
+			</h1>
+
+			<p class="subtitulo-marca mb-0">
+				PLATAFORMA DE COTIZACIÓN ONLINE &amp; CATALOGACIÓN DE PRODUCTOS
+			</p>
+		</div>
+
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-night rounded shadow-sm mb-4">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavegacion" aria-controls="menuNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="menuNavegacion">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+						<li class="nav-item">
+							<a class="nav-link active" id="btn-nav-inicio" href="#" onclick="mostrarSeccion('inicio', this)">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="btn-nav-categorias" href="#" onclick="mostrarSeccion('categorias', this)">Categorías</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="btn-nav-ofertas" href="#" onclick="mostrarSeccion('ofertas', this)">Ofertas</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="btn-nav-contacto" href="#" onclick="mostrarSeccion('contacto', this)">Contacto</a>
+						</li>
+					</ul>
+
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Buscar">
+						<button class="btn btn-warning" type="submit">Buscar</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+		<!-- ================= SECCIÓN 1: INICIO ================= -->
+		<div id="seccion-inicio">
+
+			<!-- Carrusel de banners -->
+			<div id="carruselInicio" class="carousel slide rounded shadow-sm overflow-hidden mb-5 position-relative">
+				
+				<div class="carousel-indicators">
+					<button type="button" onclick="irASlide(0)" class="active" aria-label="Slide 1"></button>
+					<button type="button" onclick="irASlide(1)" aria-label="Slide 2"></button>
+					<button type="button" onclick="irASlide(2)" aria-label="Slide 3"></button>
+				</div>
+
+				<div class="carousel-inner text-white">
+					<div class="mi-slide carousel-item active p-5 text-center" style="background-color: #1C1D21; min-height: 300px; display: block;">
+						<div class="container py-4">
+							<span class="badge bg-warning text-dark mb-2">¡Novedad!</span>
+							<h2 class="display-5 fw-bold text-warning">Cotizaciones de productos &amp; servicios</h2>
+							<p class="lead text-light opacity-75">Compara los mejores precios del mercado mundial al instante.</p>
+						</div>
+					</div>
+
+					<div class="mi-slide carousel-item p-5 text-center" style="background-color: #252850; min-height: 300px; display: none;">
+						<div class="container py-4">
+							<span class="badge mb-2" style="background-color: #6C5CE7; color: white;">Destacado</span>
+							<h2 class="display-5 fw-bold" style="color: #6C5CE7;">Las Mejores Ofertas del momento</h2>
+							<p class="lead text-light opacity-75">Encontraras productos nuevos o usados.</p>
+						</div>
+					</div>
+
+					<div class="mi-slide carousel-item p-5 text-center" style="background-color: #1A1A1A; min-height: 300px; display: none;">
+						<div class="container py-4">
+							<span class="badge bg-success mb-2">Económico</span>
+							<h2 class="display-5 fw-bold text-success">Catálogo General Actualizado</h2>
+							<p class="lead text-light opacity-75">Gestiona tus cotizaciones de manera rápida y simple.</p>
+						</div>
+					</div>
+				</div>
+
+				<button class="carousel-control-prev" type="button" onclick="cambiarSlide(-1)">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Anterior</span>
+				</button>
+				<button class="carousel-control-next" type="button" onclick="cambiarSlide(1)">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Siguiente</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- ================= SECCIÓN 2: CATEGORÍAS ================= -->
+		<div id="seccion-categorias" class="seccion-oculta mb-5">
+			<div class="text-center mb-4">
+				<h2 class="fw-bold text-dark">Explora un catalogo universal</h2>
+				<p class="text-secondary">Selecciona el producto u servicio que desees ;)</p>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">👕</span>
+						<span class="texto">ROPA &amp; CALZADO</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">🛒</span>
+						<span class="texto">SUPERMERCADO</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">🛋️</span>
+						<span class="texto">HOGAR &amp; MUEBLES</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">🛠️</span>
+						<span class="texto">HERRAMIENTAS</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">🚗</span>
+						<span class="texto">VEHÍCULOS</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">💊</span>
+						<span class="texto">FARMACIA</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">🔧</span>
+						<span class="texto">SERVICIOS</span>
+					</a>
+				</div>
+				<div class="col-6 col-md-3">
+					<a href="#" class="card-categoria-full">
+						<span class="icono">💲</span>
+						<span class="texto">USADOS</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- ================= SECCIÓN 3: OFERTAS  ================= -->
+		<div id="seccion-ofertas" class="seccion-oculta mb-5">
+			<div class="card shadow-sm border-0 p-3 bg-white rounded-4 text-center">
+				<a href="#" onclick="mostrarSeccion('detalle-producto', null); return false;">
+					<img src="https://ellaelperfum.cl/wp-content/uploads/2026/11/Oferta-de-Perfumes-Ellael-Parfum.jpg" alt="Imagen de Ofertas" class="img-fluid rounded w-100" style="height: auto;">
+				</a>
+			</div>
+		</div>
+
+		<!-- ================= PRODUCTO BOSQUEJO ================= -->
+		<div id="seccion-detalle-producto" class="seccion-oculta mb-5">
+			<div class="card shadow-sm border-0 p-4 p-md-5 bg-white rounded-4">
+				<div class="row align-items-center">
+					<!-- Columna Izquierda: Imagen del producto -->
+					<div class="col-md-5 text-center mb-4 mb-md-0">
+						<img src="https://ellaelperfum.cl/wp-content/uploads/2026/07/132-Terre-dHermes-Hermes-.jpg" alt="Detalle del Producto" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto;">
+					</div>
+
+					<!-- Columna Derecha: Título, Precio y Descripción -->
+					<div class="col-md-7">
+						<h2 class="fw-bold text-dark mb-3">Inspirado en Terre d'Hermès Hermès M#132</h2>
+						<h3 class="text-success fw-bold display-6 mb-4">$24.990</h3>
+						<p class="text-secondary" style="line-height: 1.7;">
+							Terre d'Hermès de Hermès es una fragancia de la familia olfativa Amaderada Especiada para Hombres. Terre d'Hermès se lanzó en 2006. La Nariz detrás de esta fragancia es Jean Claude Ellena. Las Notas de Salida son naranja y toronja (pomelo); las Notas de Corazón son pimienta, pelargonio y Sílex; las Notas de Fondo son vetiver, cedro, pachuli y benjuí. Este perfume es el ganador del premio FiFi Award Fragrance Of The Year Men`s Luxe 2007.
+						</p>
+						<button class="btn btn-outline-secondary mt-3" onclick="mostrarSeccion('ofertas', document.getElementById('btn-nav-ofertas'))">← Volver a Ofertas</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ================= SECCIÓN 4: CONTACTO ================= -->
+		<div id="seccion-contacto" class="seccion-oculta mb-5">
+			<div class="row justify-content-center">
+				<div class="col-md-8 col-lg-6">
+					<div class="card shadow-sm border-0 p-4 p-md-5 bg-white rounded-4 text-center">
+						<p class="mb-0 text-dark">
+							*iNserte f0rmulario de sugerencias y reportes de bugs*
+							<br>
+							<br>
+							<br>
+							Aki iria los datos de contacto :,D
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<p>texto universal (se muestra en todas las secciones :v) [sino pasa llamen a Dios T-T]</p>
+		<button class="btn btn-success">Botón de pruebando boostrap </button>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<!-- Script de control del carrusel -->
+	<script>
+		let slideActual = 0;
+		const slides = document.querySelectorAll('.mi-slide');
+		const indicadores = document.querySelectorAll('.carousel-indicators button');
+
+		function mostrarSlide(n) {
+			slides.forEach((slide, index) => {
+				slide.style.display = 'none';
+				slide.classList.remove('active');
+				indicadores[index].classList.remove('active');
+			});
+
+			slideActual = (n + slides.length) % slides.length;
+			
+			slides[slideActual].style.display = 'block';
+			slides[slideActual].classList.add('active');
+			indicadores[slideActual].classList.add('active');
+		}
+
+		function cambiarSlide(direccion) {
+			mostrarSlide(slideActual + direccion);
+		}
+
+		function irASlide(n) {
+			mostrarSlide(n);
+		}
+
+		setInterval(() => {
+			cambiarSlide(1);
+		}, 4000);
+	</script>
+
+	<!-- Script para alternar entre todas las secciones -->
+	<script>
+		function mostrarSeccion(nombreSeccion, elementoNav) {
+			// Ocultar todas las secciones existentes 
+			document.getElementById('seccion-inicio').classList.add('seccion-oculta');
+			document.getElementById('seccion-categorias').classList.add('seccion-oculta');
+			document.getElementById('seccion-ofertas').classList.add('seccion-oculta');
+			document.getElementById('seccion-detalle-producto').classList.add('seccion-oculta');
+			document.getElementById('seccion-contacto').classList.add('seccion-oculta');
+
+			// Mostrar la sección solicitada
+			document.getElementById('seccion-' + nombreSeccion).classList.remove('seccion-oculta');
+
+			// Actualizar la clase 'active' en el menú de navegación 
+			if (elementoNav) {
+				const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+				navLinks.forEach(link => link.classList.remove('active'));
+				elementoNav.classList.add('active');
+			}
+		}
+	</script>
 </body>
 </html>
