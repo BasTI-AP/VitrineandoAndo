@@ -1,0 +1,37 @@
+name: Actualizar Precios Falabella
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias del scraper
+        working-directory: ./backend
+        run: npm install
+
+      - name: Ejecutar scraping y generar productos.json
+        working-directory: ./backend
+        run: node scraper-batch.js
+
+      - name: Guardar cambios en el repositorio
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add productos.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar precios automáticamente" && git push)
