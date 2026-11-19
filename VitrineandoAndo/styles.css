@@ -1,5 +1,10 @@
 body {
-	background-color: #E5E5E5; 
+	/* background-color: #E5E5E5;  */
+	background-image: url("fondo.jpg");
+    background-size: cover;        /* Cubre toda la pantalla sin deformar la imagen */
+    background-position: center;   /* Mantiene la imagen centrada */
+    background-repeat: no-repeat;  /* Evita que se repita como mosaico */
+    background-attachment: fixed;  /* Deja el fondo fijo mientras haces scroll */
 }
 
 .bg-night {
