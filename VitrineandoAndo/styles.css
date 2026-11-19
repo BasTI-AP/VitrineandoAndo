@@ -1,6 +1,6 @@
 body {
 	/* background-color: #E5E5E5;  */
-	background-image: url("fondo.jpg");
+	background-image: url("fondo.jpeg");
     background-size: cover;        /* Cubre toda la pantalla sin deformar la imagen */
     background-position: center;   /* Mantiene la imagen centrada */
     background-repeat: no-repeat;  /* Evita que se repita como mosaico */
