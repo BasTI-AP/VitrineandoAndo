@@ -1,10 +1,16 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
 body {
 	/* background-color: #E5E5E5;  */
 	background-image: url("fondo.jpeg");
     background-size: cover;        /* Cubre toda la pantalla sin deformar la imagen */
-    background-position: center;   /* Mantiene la imagen centrada */
+    background-position: center top;   /* Mantiene la imagen centrada */
     background-repeat: no-repeat;  /* Evita que se repita como mosaico */
-    background-attachment: fixed;  /* Deja el fondo fijo mientras haces scroll */
+    background-attachment: scroll;  /* Deja el fondo fijo mientras haces scroll */
 }
 
 .bg-night {
