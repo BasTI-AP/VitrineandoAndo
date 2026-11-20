@@ -32,7 +32,7 @@ function esProductoValido(datos) {
 
 const esperar = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const PERFILES = [
+const PERFILES_DIA = [
 	{
 		ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
 		viewport: { width: 1366, height: 768 }
@@ -47,6 +47,29 @@ const PERFILES = [
 	}
 ];
 
+const PERFILES_MADRUGADA = [
+	{
+		ua: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1',
+		viewport: { width: 390, height: 844, isMobile: true }
+	},
+	{
+		ua: 'Mozilla/5.0 (Linux; Android 14; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
+		viewport: { width: 412, height: 915, isMobile: true }
+	},
+	{
+		ua: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+		viewport: { width: 1600, height: 900 }
+	}
+];
+
+// Detecta si en Chile son entre las 02:00 y las 04:59 AM
+const horaChile = Number(new Intl.DateTimeFormat('es-CL', {
+	timeZone: 'America/Santiago',
+	hour: 'numeric',
+	hour12: false
+}).format(new Date()));
+
+const PERFILES = (horaChile >= 2 && horaChile <= 4) ? PERFILES_MADRUGADA : PERFILES_DIA;
 /* ==================================================================================== */
 
 async function ejecutarScraping() {
