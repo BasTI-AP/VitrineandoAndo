@@ -2,7 +2,8 @@ name: Actualizar Precios Falabella
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    # Corre a las 11 PM, 3 AM, 5 AM, 12 PM, 4 PM y 8 PM (hora de Chile)
+    - cron: '0 2,6,8,15,19,23 * * *'
   workflow_dispatch:
 
 permissions:
