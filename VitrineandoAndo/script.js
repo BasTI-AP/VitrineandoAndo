@@ -114,61 +114,13 @@ const PRODUCTOS_SUPERMERCADO = [
 	}
 ];
 
-function mostrarSupermercado() {
-	const seccion = document.getElementById('seccion-supermercado');
-	const grid = document.getElementById('grid-supermercado');
+/* =================== VITRINA UNIVERSAL Y FILTROS ================ */
+let catalogoGlobal = [];
+let contextoActual = {
+	terminoBusqueda: '',
+	soloOfertas: false
+};
 
-	// Genera las 3 tarjetas de e-commerce
-	grid.innerHTML = PRODUCTOS_SUPERMERCADO.map(prod => `
-		<div class="col-12 col-md-4">
-			<div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-				<div class="position-relative bg-white p-3 text-center">
-					<span class="badge bg-dark position-absolute top-0 start-0 m-3">${prod.tienda}</span>
-					<img src="${prod.imagen}" alt="${prod.nombre}" class="img-fluid" style="height: 170px; object-fit: contain;">
-				</div>
-				<div class="card-body d-flex flex-column bg-white">
-					<span class="text-muted small fw-semibold text-uppercase">${prod.marca}</span>
-					<h5 class="card-title fw-bold text-dark fs-6 mt-1">${prod.nombre}</h5>
-					
-					<div class="mt-auto pt-3">
-						<div class="text-muted text-decoration-line-through small">${prod.precioNormal}</div>
-						<div class="fs-4 fw-bolder text-dark mb-2">${prod.precioOferta}</div>
-						<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">
-							Ver producto
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	`).join('');
-
-	// Muestra la sección y desliza la pantalla suavemente hacia ella
-	seccion.classList.remove('d-none');
-	seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function cerrarSupermercado() {
-	document.getElementById('seccion-supermercado').classList.add('d-none');
-}
-
-
-// Cierra la vitrina de Supermercado automáticamente al cambiar de pestaña o usar el buscador
-document.addEventListener('DOMContentLoaded', () => {
-	document.querySelectorAll('nav a, .navbar a').forEach(enlace => {
-		enlace.addEventListener('click', () => {
-			cerrarSupermercado();
-		});
-	});
-
-	const buscador = document.querySelector('nav form, .navbar form');
-	if (buscador) {
-		buscador.addEventListener('submit', () => {
-			cerrarSupermercado();
-		});
-	}
-});
-
-/* =================== BUSCADOR ================ */
 function normalizarTexto(texto) {
 	return String(texto || '')
 		.normalize('NFD')
@@ -177,108 +129,227 @@ function normalizarTexto(texto) {
 		.trim();
 }
 
-function cerrarBusqueda() {
-	const seccion = document.getElementById('seccion-busqueda');
+function cerrarVitrina() {
+	const seccion = document.getElementById('seccion-vitrina');
 	if (seccion) seccion.classList.add('d-none');
 }
 
-async function buscarProductos(termino) {
-	const query = normalizarTexto(termino);
-	if (!query) return;
+// Compatibilidad por si algún botón en index.html aún llama a las funciones antiguas
+function mostrarSupermercado() {
+	abrirVitrina({ titulo: '🛒 Supermercado', categoria: 'Supermercado' });
+}
+function cerrarSupermercado() {
+	cerrarVitrina();
+}
 
-	const seccion = document.getElementById('seccion-busqueda');
-	const grid = document.getElementById('grid-busqueda');
-	const subtitulo = document.getElementById('subtitulo-busqueda');
+// 1. Unifica productos.json + PRODUCTOS_SUPERMERCADO en un solo formato estándar
+async function cargarCatalogoUnificado() {
+	let lista = [];
 
-	let catalogoUnificado = [];
-
-	// 1. Cargar productos actualizados por el bot desde productos.json
+	// Productos automáticos desde productos.json (Falabella / Outlet)
 	try {
-		const respuesta = await fetch(`productos.json?v=${Date.now()}`);
-		if (respuesta.ok) {
-			const data = await respuesta.json();
-			const listaJson = Object.values(data.productos || {}).map(p => ({
-				etiqueta: 'Falabella',
-				titulo: p.titulo,
-				precio: `$${Number(p.precio || 0).toLocaleString('es-CL')}`,
-				imagen: p.imagen,
-				url: p.url
-			}));
-			catalogoUnificado = catalogoUnificado.concat(listaJson);
+		const res = await fetch(`productos.json?v=${Date.now()}`);
+		if (res.ok) {
+			const data = await res.json();
+			const desdeJson = Object.values(data.productos || {}).map(p => {
+				const precioNum = Number(p.precio || 0);
+				return {
+					titulo: p.titulo,
+					marca: p.marca || 'Destacado',
+					tienda: p.tienda || 'Falabella',
+					categoria: p.categoria || 'Perfumería',
+					esOferta: p.esOferta !== undefined ? p.esOferta : true,
+					precioNum: precioNum,
+					precioTexto: `$${precioNum.toLocaleString('es-CL')}`,
+					precioNormal: p.precioNormal || '',
+					imagen: p.imagen,
+					url: p.url
+				};
+			});
+			lista = lista.concat(desdeJson);
 		}
 	} catch (e) {
-		console.warn('No se pudo leer productos.json en la búsqueda:', e);
+		console.warn('Error leyendo productos.json:', e);
 	}
 
-	// 2. Sumar productos de Supermercado (si existen en script.js)
+	// Productos de Supermercado definidos arriba en script.js
 	if (typeof PRODUCTOS_SUPERMERCADO !== 'undefined') {
-		const listaSuper = PRODUCTOS_SUPERMERCADO.map(p => ({
-			etiqueta: p.tienda,
-			titulo: `${p.marca} - ${p.nombre}`,
-			precio: p.precioOferta,
+		const desdeSuper = PRODUCTOS_SUPERMERCADO.map(p => ({
+			titulo: p.nombre,
+			marca: p.marca,
+			tienda: p.tienda,
+			categoria: 'Supermercado',
+			esOferta: true,
+			precioNum: Number(String(p.precioOferta).replace(/\D/g, '')) || 0,
+			precioTexto: p.precioOferta,
+			precioNormal: p.precioNormal || '',
 			imagen: p.imagen,
 			url: p.url
 		}));
-		catalogoUnificado = catalogoUnificado.concat(listaSuper);
+		lista = lista.concat(desdeSuper);
 	}
 
-	// 3. Filtrar por coincidencia en título o tienda
-	const coincidencias = catalogoUnificado.filter(item =>
-		normalizarTexto(item.titulo).includes(query) ||
-		normalizarTexto(item.etiqueta).includes(query)
-	);
+	catalogoGlobal = lista;
+	return lista;
+}
 
-	subtitulo.textContent = `Búsqueda: "${termino}" (${coincidencias.length} ${coincidencias.length === 1 ? 'resultado' : 'resultados'})`;
+// 2. Abre la vitrina configurada según desde dónde hizo clic el usuario
+async function abrirVitrina({ titulo = 'Catálogo', categoria = 'todas', soloOfertas = false, busqueda = '' } = {}) {
+	await cargarCatalogoUnificado();
 
-	// 4. Dibujar resultados o mensaje si no hubo coincidencias
-	if (coincidencias.length === 0) {
-		grid.innerHTML = `
-			<div class="col-12 text-center py-4">
-				<p class="text-white fs-5 mb-1">No encontramos productos que coincidan con <strong>"${termino}"</strong>.</p>
-				<small class="text-light opacity-75">Intenta buscar otra palabra como "perfume", "boss", "leche" o "arroz".</small>
-			</div>
-		`;
-	} else {
-		grid.innerHTML = coincidencias.map(prod => `
-			<div class="col-12 col-md-4">
-				<div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
-					<div class="position-relative bg-white p-3 text-center">
-						<span class="badge bg-dark position-absolute top-0 start-0 m-3">${prod.etiqueta}</span>
-						<img src="${prod.imagen}" alt="${prod.titulo}" class="img-fluid" style="height: 170px; object-fit: contain;">
-					</div>
-					<div class="card-body d-flex flex-column bg-white">
-						<h5 class="card-title fw-bold text-dark fs-6 mt-1">${prod.titulo}</h5>
-						<div class="mt-auto pt-3">
-							<div class="fs-4 fw-bolder text-dark mb-2">${prod.precio}</div>
-							<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">
-								Ver producto
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		`).join('');
-	}
+	contextoActual = {
+		terminoBusqueda: busqueda,
+		soloOfertas: soloOfertas
+	};
 
-	if (typeof cerrarSupermercado === 'function') cerrarSupermercado();
+	document.getElementById('vitrina-titulo').textContent = titulo;
+	document.getElementById('filtro-categoria').value = categoria;
+	document.getElementById('filtro-precio-min').value = '';
+	document.getElementById('filtro-precio-max').value = '';
+	document.getElementById('orden-precio').value = 'defecto';
+
+	aplicarFiltrosGenerales(true);
+
+	const seccion = document.getElementById('seccion-vitrina');
 	seccion.classList.remove('d-none');
 	seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Conectar el formulario de la barra superior y cerrar búsqueda al cambiar de sección
+// 3. Actualiza las opciones del filtro "Tienda" según la categoría elegida
+function actualizarOpcionesTiendas(productosBase) {
+	const selectTienda = document.getElementById('filtro-tienda');
+	const tiendaPrevia = selectTienda.value;
+
+	const tiendasUnicas = [...new Set(productosBase.map(p => p.tienda).filter(Boolean))];
+	selectTienda.innerHTML = `<option value="todas">Todas</option>` +
+		tiendasUnicas.map(t => `<option value="${t}">${t}</option>`).join('');
+
+	if (tiendasUnicas.includes(tiendaPrevia)) {
+		selectTienda.value = tiendaPrevia;
+	}
+}
+
+// 4. Filtra por categoría, tienda, rango de precio, orden y búsqueda
+function aplicarFiltrosGenerales(recalcularTiendas = false) {
+	const catElegida = document.getElementById('filtro-categoria').value;
+	const orden = document.getElementById('orden-precio').value;
+	const query = normalizarTexto(contextoActual.terminoBusqueda);
+
+	// Filtro base (Categoría + Ofertas + Búsqueda)
+	let base = catalogoGlobal.filter(prod => {
+		const cumpleCat = (catElegida === 'todas') || (prod.categoria === catElegida);
+		const cumpleOferta = !contextoActual.soloOfertas || prod.esOferta;
+		const cumpleBusqueda = !query ||
+			normalizarTexto(prod.titulo).includes(query) ||
+			normalizarTexto(prod.marca).includes(query) ||
+			normalizarTexto(prod.tienda).includes(query) ||
+			normalizarTexto(prod.categoria).includes(query);
+
+		return cumpleCat && cumpleOferta && cumpleBusqueda;
+	});
+
+	if (recalcularTiendas) {
+		actualizarOpcionesTiendas(base);
+	}
+
+	// Filtro de Tienda y Rango de Precio (Mínimo y Máximo)
+	const tiendaElegida = document.getElementById('filtro-tienda').value;
+	const precioMin = Number(document.getElementById('filtro-precio-min').value);
+	const precioMax = Number(document.getElementById('filtro-precio-max').value);
+
+	let filtrados = base.filter(prod => {
+		const cumpleTienda = (tiendaElegida === 'todas') || (prod.tienda === tiendaElegida);
+		const cumpleMin = (!precioMin || precioMin <= 0) || (prod.precioNum >= precioMin);
+		const cumpleMax = (!precioMax || precioMax <= 0) || (prod.precioNum <= precioMax);
+		return cumpleTienda && cumpleMin && cumpleMax;
+	});
+
+	// Ordenar por precio
+	if (orden === 'menor') {
+		filtrados.sort((a, b) => a.precioNum - b.precioNum);
+	} else if (orden === 'mayor') {
+		filtrados.sort((a, b) => b.precioNum - a.precioNum);
+	}
+
+	// Actualizar contador
+	const subtitulo = document.getElementById('vitrina-subtitulo');
+	const textoBusq = contextoActual.terminoBusqueda ? ` para "${contextoActual.terminoBusqueda}"` : '';
+	subtitulo.textContent = `Mostrando ${filtrados.length} ${filtrados.length === 1 ? 'producto' : 'productos'}${textoBusq}`;
+
+	// Renderizar tarjetas
+	const grid = document.getElementById('grid-vitrina');
+	if (filtrados.length === 0) {
+		const avisoRango = (precioMin > 0 && precioMax > 0 && precioMin > precioMax)
+			? 'El precio mínimo no puede ser mayor que el precio máximo.'
+			: 'Prueba ampliando el rango de precio o seleccionando "Todas" en tienda.';
+
+		grid.innerHTML = `
+			<div class="col-12 text-center py-4">
+				<p class="text-white fs-5 mb-1">No hay productos que coincidan con estos filtros.</p>
+				<small class="text-light opacity-75">${avisoRango}</small>
+			</div>
+		`;
+		return;
+	}
+
+	grid.innerHTML = filtrados.map(prod => `
+		<div class="col-12 col-md-4">
+			<div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
+				<div class="position-relative bg-white p-3 text-center">
+					<span class="badge bg-dark position-absolute top-0 start-0 m-3">${prod.tienda}</span>
+					<span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">${prod.categoria}</span>
+					<img src="${prod.imagen}" alt="${prod.titulo}" class="img-fluid" style="height: 170px; object-fit: contain;">
+				</div>
+				<div class="card-body d-flex flex-column bg-white">
+					<span class="text-muted small fw-semibold text-uppercase">${prod.marca}</span>
+					<h5 class="card-title fw-bold text-dark fs-6 mt-1">${prod.titulo}</h5>
+					<div class="mt-auto pt-3">
+						${prod.precioNormal ? `<div class="text-muted text-decoration-line-through small">${prod.precioNormal}</div>` : ''}
+						<div class="fs-4 fw-bolder text-dark mb-2">${prod.precioTexto}</div>
+						<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">
+							Ver producto
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	`).join('');
+}
+
+function limpiarFiltros() {
+	document.getElementById('filtro-tienda').value = 'todas';
+	document.getElementById('filtro-precio-min').value = '';
+	document.getElementById('filtro-precio-max').value = '';
+	document.getElementById('orden-precio').value = 'defecto';
+	aplicarFiltrosGenerales(false);
+}
+
+// 5. Conectar barra de búsqueda superior y cierre automático al cambiar de menú
 document.addEventListener('DOMContentLoaded', () => {
 	const formBuscador = document.querySelector('nav form, .navbar form');
 	if (formBuscador) {
 		formBuscador.addEventListener('submit', (e) => {
-			e.preventDefault(); // Evita que la página se recargue
+			e.preventDefault();
 			const input = formBuscador.querySelector('input');
-			if (input) buscarProductos(input.value);
+			const texto = input ? input.value.trim() : '';
+			if (!texto) return;
+
+			abrirVitrina({
+				titulo: `🔍 Resultados de búsqueda`,
+				categoria: 'todas',
+				busqueda: texto
+			});
 		});
 	}
 
 	document.querySelectorAll('nav a, .navbar a').forEach(enlace => {
 		enlace.addEventListener('click', () => {
-			cerrarBusqueda();
+			const textoEnlace = normalizarTexto(enlace.textContent);
+			if (textoEnlace === 'ofertas') {
+				abrirVitrina({ titulo: '🔥 Ofertas y Outlet', soloOfertas: true });
+			} else {
+				cerrarVitrina();
+			}
 		});
 	});
 });
