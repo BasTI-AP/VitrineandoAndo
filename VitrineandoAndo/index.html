@@ -56,90 +56,99 @@
 			</div>
 		</nav>
 
-		<!-- ===================== SUB-SECCION: RESULTADOS DE BUSQUEDA ==================== -->
-		
-		<section id="seccion-vitrina" class="container my-5 d-none">
-			<div class="p-4 rounded-4 bg-dark bg-opacity-75 border border-warning shadow-lg">
-				
-				<div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
-					<div>
-						<h2 class="text-white fw-bold mb-0">🔍 Resultados de búsqueda</h2>
-						<small id="subtitulo-busqueda" class="text-light opacity-75"></small>
-					</div>
-					<button type="button" class="btn btn-outline-light btn-sm" onclick="cerrarBusqueda()">
-						Cerrar ✕
-					</button>
-				</div>
-		
-				<div id="grid-busqueda" class="row g-4"></div>
-		
-			</div>
-		</section>
+		<!-- ================= RESULTADOS DE BÚSQUEDA CON FILTROS LATERALES ================= -->
+		<div id="seccion-busqueda" class="seccion-oculta mb-5">
+			<div class="bg-white text-dark rounded-4 p-4 shadow-lg">
 
-		<!-- ================ FILTROS ================= -->
-		<section id="seccion-vitrina" class="container my-5 d-none">
-			<div class="p-4 rounded-4 bg-dark bg-opacity-75 border border-secondary shadow-lg">
-		
-				<!-- Encabezado dinámico -->
-				<div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary">
+				<!-- Encabezado -->
+				<div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
 					<div>
-						<h2 id="vitrina-titulo" class="text-white fw-bold mb-0">Catálogo</h2>
-						<small id="vitrina-subtitulo" class="text-light opacity-75"></small>
+						<small class="text-muted d-block">VitrineandoAndo / Buscador</small>
+						<h2 id="busqueda-titulo" class="fw-bold text-dark mb-0">Resultados de búsqueda</h2>
 					</div>
-					<button type="button" class="btn btn-outline-light btn-sm" onclick="cerrarVitrina()">
-						Cerrar ✕
+					<button type="button" class="btn btn-outline-secondary btn-sm" onclick="cerrarBusqueda()">
+						← Volver
 					</button>
 				</div>
-		
-				<!-- Barra de Filtros General -->
-				<div class="row g-2 mb-4 align-items-end bg-black bg-opacity-25 p-3 rounded-3">
-					<div class="col-12 col-sm-6 col-md-2">
-						<label for="filtro-categoria" class="form-label text-light small mb-1">Categoría</label>
-						<select id="filtro-categoria" class="form-select form-select-sm" onchange="aplicarFiltrosGenerales(true)">
-							<option value="todas">Todas</option>
-							<option value="Supermercado">Supermercado</option>
-							<option value="Perfumería">Perfumería</option>
-						</select>
-					</div>
-				
-					<div class="col-12 col-sm-6 col-md-2">
-						<label for="filtro-tienda" class="form-label text-light small mb-1">Tienda</label>
-						<select id="filtro-tienda" class="form-select form-select-sm" onchange="aplicarFiltrosGenerales(false)">
-							<option value="todas">Todas</option>
-						</select>
-					</div>
-				
-					<div class="col-12 col-md-4">
-						<label class="form-label text-light small mb-1">Rango de precio ($)</label>
-						<div class="input-group input-group-sm">
-							<input type="number" id="filtro-precio-min" class="form-control" placeholder="Mín. ej: 1000" min="0" oninput="aplicarFiltrosGenerales(false)">
-							<span class="input-group-text bg-secondary text-white border-secondary">-</span>
-							<input type="number" id="filtro-precio-max" class="form-control" placeholder="Máx. ej: 90000" min="0" oninput="aplicarFiltrosGenerales(false)">
+
+				<div class="row g-4">
+					<!-- BARRA LATERAL IZQUIERDA DE FILTROS -->
+					<aside class="col-12 col-lg-3 border-end-lg">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+							<span id="busqueda-contador" class="fw-bold small" style="color: #e67e22;">0 resultados</span>
+							<button type="button" class="btn btn-link btn-sm p-0 text-decoration-none fw-bold text-uppercase" style="color: #e67e22; font-size: 0.75rem;" onclick="limpiarFiltrosBusqueda()">
+								Borrar filtros
+							</button>
 						</div>
-					</div>
-				
-					<div class="col-12 col-sm-6 col-md-2">
-						<label for="orden-precio" class="form-label text-light small mb-1">Ordenar por</label>
-						<select id="orden-precio" class="form-select form-select-sm" onchange="aplicarFiltrosGenerales(false)">
-							<option value="defecto">Relevancia</option>
-							<option value="menor">Menor precio</option>
-							<option value="mayor">Mayor precio</option>
-						</select>
-					</div>
-				
-					<div class="col-12 col-sm-6 col-md-2 d-grid">
-						<button type="button" class="btn btn-outline-warning btn-sm" onclick="limpiarFiltros()">
-							Limpiar filtros
-						</button>
+
+						<!-- Slider doble de Precio -->
+						<div class="mb-3 pb-3 border-bottom">
+							<div class="d-flex justify-content-between align-items-center mb-1">
+								<label class="fw-semibold small text-dark mb-0">Precio</label>
+								<span id="texto-rango-precio" class="small text-muted fw-semibold">$0 - $200.000</span>
+							</div>
+
+							<div class="dual-slider-box my-2">
+								<div class="dual-slider-track"></div>
+								<div id="dual-slider-fill" class="dual-slider-fill"></div>
+								<input type="range" id="rango-min" min="0" max="200000" step="500" value="0" oninput="actualizarSliderPrecio('min')">
+								<input type="range" id="rango-max" min="0" max="200000" step="500" value="200000" oninput="actualizarSliderPrecio('max')">
+							</div>
+						</div>
+
+						<!-- Palabras clave -->
+						<div class="mb-3 pb-3 border-bottom">
+							<input type="text" id="filtro-palabras" class="form-control form-control-sm" placeholder="Palabras clave" oninput="aplicarFiltrosBusqueda(false)">
+						</div>
+
+						<!-- Desplegable: Datos generales -->
+						<div class="accordion accordion-flush" id="acordeonFiltros">
+							<div class="accordion-item border-0">
+								<h2 class="accordion-header">
+									<button class="accordion-button px-0 py-2 bg-transparent text-dark fw-semibold small shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenerales" aria-expanded="true">
+										Datos generales
+									</button>
+								</h2>
+								<div id="collapseGenerales" class="accordion-collapse collapse show">
+									<div class="accordion-body px-0 pt-1 pb-2 d-flex flex-column gap-2">
+										<select id="filtro-categoria" class="form-select form-select-sm text-secondary" onchange="aplicarFiltrosBusqueda(true)">
+											<option value="todas">Categorías (Todas)</option>
+											<option value="Supermercado">Supermercado</option>
+											<option value="Perfumería">Perfumería</option>
+										</select>
+
+										<select id="filtro-tienda" class="form-select form-select-sm text-secondary" onchange="aplicarFiltrosBusqueda(false)">
+											<option value="todas">Tiendas (Todas)</option>
+										</select>
+
+										<select id="filtro-marca" class="form-select form-select-sm text-secondary" onchange="aplicarFiltrosBusqueda(false)">
+											<option value="todas">Marcas (Todas)</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</aside>
+
+					<!-- COLUMNA DERECHA: ORDENAMIENTO + GRILLA -->
+					<div class="col-12 col-lg-9">
+						<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-2 border-bottom">
+							<select id="orden-precio" class="form-select form-select-sm" style="width: auto; min-width: 180px;" onchange="aplicarFiltrosBusqueda(false)">
+								<option value="defecto">Ordenar por</option>
+								<option value="menor">Precio: menor a mayor</option>
+								<option value="mayor">Precio: mayor a menor</option>
+								<option value="az">Nombre: A - Z</option>
+							</select>
+
+							<small id="busqueda-subtitulo" class="text-muted">Mostrando productos</small>
+						</div>
+
+						<div id="grid-busqueda" class="row g-3"></div>
 					</div>
 				</div>
-		
-				<!-- Grilla de productos filtrados -->
-				<div id="grid-vitrina" class="row g-4"></div>
-		
-			</div>
-		</section>
 
+			</div>
+		</div>
 
 
 		
@@ -272,6 +281,24 @@
 		
 			</div>
 		</section>
+
+		<!-- SUB-SECCIÓN: SUPERMERCADO -->
+			<section id="seccion-supermercado" class="my-5 d-none">
+				<div class="p-4 rounded-4 bg-dark bg-opacity-75 border border-secondary shadow-lg">
+					<div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+						<div>
+							<h2 class="text-white fw-bold mb-0">🛒 Supermercado</h2>
+							<small class="text-light opacity-75">Mostrando 3 productos destacados</small>
+						</div>
+						<button type="button" class="btn btn-outline-light btn-sm" onclick="cerrarSupermercado()">
+							Cerrar ✕
+						</button>
+					</div>
+
+					<div id="grid-supermercado" class="row g-4"></div>
+				</div>
+			</section>
+		</div>
 
 		
 
