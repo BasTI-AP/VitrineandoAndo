@@ -282,3 +282,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 });
+//Enviar Formulario
+
+function enviarFormularioContacto(event) {
+	event.preventDefault();
+	const alerta = document.getElementById('alerta-contacto');
+	alerta.classList.remove('d-none');
+	event.target.reset();
+
+	setTimeout(() => {
+		alerta.classList.add('d-none');
+	}, 4000);
+}
