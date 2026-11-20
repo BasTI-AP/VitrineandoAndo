@@ -120,7 +120,7 @@
 					</a>
 				</div>
 				<div class="col-6 col-md-3">
-					<a href="#" class="card-categoria-full">
+					<a href="#" class="card-categoria-full" onclick="event.preventDefault(); mostrarSupermercado();">
 						<span class="icono">🛒</span>
 						<span class="texto">SUPERMERCADO</span>
 					</a>
@@ -163,6 +163,29 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- ================= SUB-Secciónes desplegables ================= -->
+		<section id="seccion-supermercado" class="container my-5 d-none">
+			<div class="p-4 rounded-4 bg-dark bg-opacity-75 border border-secondary shadow-lg">
+				
+				<!-- Encabezado de la sección -->
+				<div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+					<div>
+						<h2 class="text-white fw-bold mb-0">🛒 Supermercado</h2>
+						<small class="text-light opacity-75">Mostrando 3 productos destacados</small>
+					</div>
+					<button type="button" class="btn btn-outline-light btn-sm" onclick="cerrarSupermercado()">
+						Cerrar ✕
+					</button>
+				</div>
+		
+				<!-- Aquí script.js inyectará automáticamente los 3 productos -->
+				<div id="grid-supermercado" class="row g-4"></div>
+		
+			</div>
+		</section>
+
+		
 
 		<!-- ================= SECCIÓN 3: OFERTAS ================= -->
 		<div id="seccion-ofertas" class="seccion-oculta mb-5">
