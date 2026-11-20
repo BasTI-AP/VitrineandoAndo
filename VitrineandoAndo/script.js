@@ -150,3 +150,20 @@ function mostrarSupermercado() {
 function cerrarSupermercado() {
 	document.getElementById('seccion-supermercado').classList.add('d-none');
 }
+
+
+// Cierra la vitrina de Supermercado automáticamente al cambiar de pestaña o usar el buscador
+document.addEventListener('DOMContentLoaded', () => {
+	document.querySelectorAll('nav a, .navbar a').forEach(enlace => {
+		enlace.addEventListener('click', () => {
+			cerrarSupermercado();
+		});
+	});
+
+	const buscador = document.querySelector('nav form, .navbar form');
+	if (buscador) {
+		buscador.addEventListener('submit', () => {
+			cerrarSupermercado();
+		});
+	}
+});
