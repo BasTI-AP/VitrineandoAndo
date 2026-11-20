@@ -81,3 +81,72 @@ async function abrirProducto(idProducto) {
 		console.error(error);
 	}
 }
+
+
+/* ============================ BOSQUEJO SUPERMERCADO ================================ */
+const PRODUCTOS_SUPERMERCADO = [
+	{
+		tienda: 'Jumbo',
+		marca: 'Colun',
+		nombre: 'Leche Entera Natural 1 L',
+		precioNormal: '$1.390',
+		precioOferta: '$1.090',
+		imagen: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80',
+		url: 'https://www.jumbo.cl/'
+	},
+	{
+		tienda: 'Lider',
+		marca: 'Miraflores',
+		nombre: 'Arroz Grado 1 Largo Ancho 1 kg',
+		precioNormal: '$1.890',
+		precioOferta: '$1.450',
+		imagen: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80',
+		url: 'https://www.lider.cl/'
+	},
+	{
+		tienda: 'Santa Isabel',
+		marca: 'Chef',
+		nombre: 'Aceite Vegetal 100% Maravilla 1 L',
+		precioNormal: '$2.790',
+		precioOferta: '$2.190',
+		imagen: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80',
+		url: 'https://www.santaisabel.cl/'
+	}
+];
+
+function mostrarSupermercado() {
+	const seccion = document.getElementById('seccion-supermercado');
+	const grid = document.getElementById('grid-supermercado');
+
+	// Genera las 3 tarjetas de e-commerce
+	grid.innerHTML = PRODUCTOS_SUPERMERCADO.map(prod => `
+		<div class="col-12 col-md-4">
+			<div class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
+				<div class="position-relative bg-white p-3 text-center">
+					<span class="badge bg-dark position-absolute top-0 start-0 m-3">${prod.tienda}</span>
+					<img src="${prod.imagen}" alt="${prod.nombre}" class="img-fluid" style="height: 170px; object-fit: contain;">
+				</div>
+				<div class="card-body d-flex flex-column bg-white">
+					<span class="text-muted small fw-semibold text-uppercase">${prod.marca}</span>
+					<h5 class="card-title fw-bold text-dark fs-6 mt-1">${prod.nombre}</h5>
+					
+					<div class="mt-auto pt-3">
+						<div class="text-muted text-decoration-line-through small">${prod.precioNormal}</div>
+						<div class="fs-4 fw-bolder text-dark mb-2">${prod.precioOferta}</div>
+						<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">
+							Ver producto
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	`).join('');
+
+	// Muestra la sección y desliza la pantalla suavemente hacia ella
+	seccion.classList.remove('d-none');
+	seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function cerrarSupermercado() {
+	document.getElementById('seccion-supermercado').classList.add('d-none');
+}
