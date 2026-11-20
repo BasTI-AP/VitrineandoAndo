@@ -83,5 +83,27 @@ body {
 .seccion-oculta {
 	display: none !important;
 }
+/* Alerta de confirmación en la sección de Contacto */
+#alerta-contacto {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #a3cfbb;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15);
+    animation: aparecerAlerta 0.3s ease-out;
+}
 
+@keyframes aparecerAlerta {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
