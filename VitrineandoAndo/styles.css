@@ -83,6 +83,7 @@ body {
 .seccion-oculta {
 	display: none !important;
 }
+
 /* Alerta de confirmación en la sección de Contacto */
 #alerta-contacto {
     background-color: #d1e7dd;
@@ -107,3 +108,81 @@ body {
     }
 }
 
+/* ================= COMPARADOR DE 5 TIENDAS (ESTILO BOCETO) ================= */
+.comparador-card {
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	background-color: #ffffff;
+	overflow: hidden;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.comparador-header {
+	background-color: #fafafa;
+}
+
+.fila-tienda {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 12px 16px;
+	border-bottom: 1px solid #edf2f7;
+	transition: background-color 0.2s ease;
+}
+
+.fila-tienda:last-child {
+	border-bottom: none;
+}
+
+.fila-mejor-opcion {
+	background-color: #d6f5f3;
+}
+
+.badge-mejor-opcion {
+	background-color: #2cc5b8;
+	color: #ffffff;
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.4px;
+	padding: 5px 11px;
+	border-radius: 50px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.btn-ir-tienda {
+	background-color: #492282;
+	color: #ffffff !important;
+	font-size: 0.78rem;
+	font-weight: 700;
+	padding: 7px 16px;
+	border-radius: 50px;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-ir-tienda:hover {
+	background-color: #361666;
+	transform: translateY(-1px);
+}
+
+.logo-tienda {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 800;
+	font-size: 0.78rem;
+	padding: 4px 10px;
+	border-radius: 6px;
+	min-width: 96px;
+	text-align: center;
+}
+
+.logo-falabella { background-color: #aad500; color: #ffffff; }
+.logo-paris { background-color: #006ce0; color: #ffffff; }
+.logo-ripley { background-color: #6a1b9a; color: #ffffff; }
+.logo-mercadolibre { background-color: #ffe600; color: #2d3277; }
+.logo-lapolar { background-color: #d50000; color: #ffffff; }
+.logo-default { background-color: #212529; color: #ffffff; }
