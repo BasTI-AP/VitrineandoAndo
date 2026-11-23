@@ -1,12 +1,517 @@
 {
-  "ultimaActualizacion": "2026-11-23T19:56:51.800Z",
   "productos": {
+    "zapatillas-nike-air-max": {
+      "titulo": "Zapatillas Nike Air Max Excee Hombre",
+      "marca": "Nike",
+      "categoria": "Ropa & Calzado",
+      "condicion": "Nuevo",
+      "destacado": true,
+      "precioNormal": 89990,
+      "precio": 69990,
+      "tienda": "Dafiti",
+      "imagen": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Zapatillas urbanas con cámara de aire visible Nike Air, capellada de malla transpirable y refuerzos de cuero sintético.",
+      "ofertas": [
+        { "tienda": "Dafiti", "precio": 69990, "url": "https://www.dafiti.cl/" },
+        { "tienda": "Falabella", "precio": 72500, "url": "https://www.falabella.com/falabella-cl" },
+        { "tienda": "Zattini", "precio": 74000, "url": "https://www.zattini.cl/" },
+        { "tienda": "Paris", "precio": 76990, "url": "https://www.paris.cl/" },
+        { "tienda": "Ripley", "precio": 79990, "url": "https://simple.ripley.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Dafiti": 79990, "Falabella": 82990, "Zattini": 84990, "Paris": 85990, "Ripley": 89990 } },
+        { "fecha": "10/11", "precios": { "Dafiti": 74990, "Falabella": 76990, "Zattini": 78990, "Paris": 79990, "Ripley": 82990 } },
+        { "fecha": "23/11", "precios": { "Dafiti": 69990, "Falabella": 72500, "Zattini": 74000, "Paris": 76990, "Ripley": 79990 } }
+      ]
+    },
+    "poleron-adidas-essentials": {
+      "titulo": "Polerón Adidas Essentials Capucha Hombre",
+      "marca": "Adidas",
+      "categoria": "Ropa & Calzado",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 44990,
+      "precio": 34990,
+      "tienda": "Falabella",
+      "imagen": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Polerón con capucha ajustable en felpa francesa de algodón suave, bolsillo canguro frontal y logotipo bordado en el pecho.",
+      "ofertas": [
+        { "tienda": "Falabella", "precio": 34990, "url": "https://www.falabella.com/falabella-cl" },
+        { "tienda": "Dafiti", "precio": 36500, "url": "https://www.dafiti.cl/" },
+        { "tienda": "Ripley", "precio": 39990, "url": "https://simple.ripley.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Falabella": 42990, "Dafiti": 41990, "Ripley": 44990 } },
+        { "fecha": "23/11", "precios": { "Falabella": 34990, "Dafiti": 36500, "Ripley": 39990 } }
+      ]
+    },
+    "jeans-levis-501": {
+      "titulo": "Jeans Levi's 501 Original Fit Azul",
+      "marca": "Levi's",
+      "categoria": "Ropa & Calzado",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 59990,
+      "precio": 44990,
+      "tienda": "Paris",
+      "imagen": "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Corte recto clásico 100% algodón de alta resistencia con cierre de botones metálicos.",
+      "ofertas": [
+        { "tienda": "Paris", "precio": 44990, "url": "https://www.paris.cl/" },
+        { "tienda": "Falabella", "precio": 47990, "url": "https://www.falabella.com/falabella-cl" },
+        { "tienda": "Dafiti", "precio": 49990, "url": "https://www.dafiti.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Paris": 54990, "Falabella": 56990, "Dafiti": 59990 } },
+        { "fecha": "23/11", "precios": { "Paris": 44990, "Falabella": 47990, "Dafiti": 49990 } }
+      ]
+    },
+    "pack-aceite-vegetal": {
+      "titulo": "Aceite Vegetal 100% Maravilla Chef 1 L",
+      "marca": "Chef",
+      "categoria": "Supermercado",
+      "condicion": "Nuevo",
+      "destacado": true,
+      "precioNormal": 2790,
+      "precio": 2190,
+      "tienda": "Lider",
+      "imagen": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Aceite vegetal de maravilla libre de colesterol, formato botella familiar de 1 litro.",
+      "ofertas": [
+        { "tienda": "Lider", "precio": 2190, "url": "https://www.lider.cl/" },
+        { "tienda": "Jumbo", "precio": 2350, "url": "https://www.jumbo.cl/" },
+        { "tienda": "Unimarc", "precio": 2490, "url": "https://www.unimarc.cl/" },
+        { "tienda": "Santa Isabel", "precio": 2550, "url": "https://www.santaisabel.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Lider": 2590, "Jumbo": 2690, "Unimarc": 2790 } },
+        { "fecha": "23/11", "precios": { "Lider": 2190, "Jumbo": 2350, "Unimarc": 2490 } }
+      ]
+    },
+    "leche-colun-entera": {
+      "titulo": "Leche Entera Natural Colun 1 L",
+      "marca": "Colun",
+      "categoria": "Supermercado",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 1390,
+      "precio": 1090,
+      "tienda": "Jumbo",
+      "imagen": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Leche fluida entera UHT proveniente del sur de Chile, envase Tetra Pak de 1 litro.",
+      "ofertas": [
+        { "tienda": "Jumbo", "precio": 1090, "url": "https://www.jumbo.cl/" },
+        { "tienda": "Lider", "precio": 1150, "url": "https://www.lider.cl/" },
+        { "tienda": "Unimarc", "precio": 1220, "url": "https://www.unimarc.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Jumbo": 1290, "Lider": 1250, "Unimarc": 1350 } },
+        { "fecha": "23/11", "precios": { "Jumbo": 1090, "Lider": 1150, "Unimarc": 1220 } }
+      ]
+    },
+    "arroz-miraflores-1kg": {
+      "titulo": "Arroz Grado 1 Largo Ancho Miraflores 1 kg",
+      "marca": "Miraflores",
+      "categoria": "Supermercado",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 1890,
+      "precio": 1390,
+      "tienda": "Unimarc",
+      "imagen": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Arroz seleccionado grado 1 de grano largo y ancho, bolsa de 1 kilogramo.",
+      "ofertas": [
+        { "tienda": "Unimarc", "precio": 1390, "url": "https://www.unimarc.cl/" },
+        { "tienda": "Lider", "precio": 1450, "url": "https://www.lider.cl/" },
+        { "tienda": "Jumbo", "precio": 1590, "url": "https://www.jumbo.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Unimarc": 1690, "Lider": 1750, "Jumbo": 1850 } },
+        { "fecha": "23/11", "precios": { "Unimarc": 1390, "Lider": 1450, "Jumbo": 1590 } }
+      ]
+    },
+    "sofa-seccional-3-cuerpos": {
+      "titulo": "Sofá Seccional 3 Cuerpos Tela Gris",
+      "marca": "Basement Home",
+      "categoria": "Hogar & Muebles",
+      "condicion": "Nuevo",
+      "destacado": true,
+      "precioNormal": 329990,
+      "precio": 249990,
+      "tienda": "Sodimac",
+      "imagen": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Sofá seccional reversible tapizado en lino sintético de fácil limpieza, estructura de madera de pino radiata.",
+      "ofertas": [
+        { "tienda": "Sodimac", "precio": 249990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Easy", "precio": 269990, "url": "https://www.easy.cl/" },
+        { "tienda": "Paris", "precio": 289990, "url": "https://www.paris.cl/" },
+        { "tienda": "Falabella", "precio": 299990, "url": "https://www.falabella.com/falabella-cl" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Sodimac": 299990, "Easy": 309990, "Paris": 319990 } },
+        { "fecha": "23/11", "precios": { "Sodimac": 249990, "Easy": 269990, "Paris": 289990 } }
+      ]
+    },
+    "juego-comedor-4-sillas": {
+      "titulo": "Juego de Comedor Madera 4 Sillas Nórdico",
+      "marca": "Form",
+      "categoria": "Hogar & Muebles",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 179990,
+      "precio": 139990,
+      "tienda": "Easy",
+      "imagen": "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Mesa rectangular cubierta MDF lacada blanca con patas de madera haya y 4 sillas acolchadas.",
+      "ofertas": [
+        { "tienda": "Easy", "precio": 139990, "url": "https://www.easy.cl/" },
+        { "tienda": "Sodimac", "precio": 149990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Falabella", "precio": 159990, "url": "https://www.falabella.com/falabella-cl" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Easy": 169990, "Sodimac": 174990, "Falabella": 179990 } },
+        { "fecha": "23/11", "precios": { "Easy": 139990, "Sodimac": 149990, "Falabella": 159990 } }
+      ]
+    },
+    "juego-sabanas-cannon": {
+      "titulo": "Juego de Sábanas 2 Plazas 200 Hilos Cannon",
+      "marca": "Cannon",
+      "categoria": "Hogar & Muebles",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 34990,
+      "precio": 24990,
+      "tienda": "Ripley",
+      "imagen": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Juego de sábanas de algodón suavizado 200 hilos, incluye sábana superior, bajera elasticada y 2 fundas.",
+      "ofertas": [
+        { "tienda": "Ripley", "precio": 24990, "url": "https://simple.ripley.cl/" },
+        { "tienda": "Paris", "precio": 26990, "url": "https://www.paris.cl/" },
+        { "tienda": "Falabella", "precio": 28990, "url": "https://www.falabella.com/falabella-cl" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Ripley": 32990, "Paris": 33990, "Falabella": 34990 } },
+        { "fecha": "23/11", "precios": { "Ripley": 24990, "Paris": 26990, "Falabella": 28990 } }
+      ]
+    },
+    "taladro-inalambrico-18v": {
+      "titulo": "Taladro Inalámbrico Percutor 18V Bosch",
+      "marca": "Bosch",
+      "categoria": "Herramientas",
+      "condicion": "Nuevo",
+      "destacado": true,
+      "precioNormal": 54990,
+      "precio": 39990,
+      "tienda": "Sodimac",
+      "imagen": "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Taladro atornillador percutor inalámbrico 18V con mandril de 13mm, 2 velocidades mecánicas y maletín de transporte.",
+      "ofertas": [
+        { "tienda": "Sodimac", "precio": 39990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Easy", "precio": 42990, "url": "https://www.easy.cl/" },
+        { "tienda": "Construmart", "precio": 44500, "url": "https://www.construmart.cl/" },
+        { "tienda": "Mercado Libre", "precio": 46990, "url": "https://www.mercadolibre.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Sodimac": 49990, "Easy": 51990, "Construmart": 52990 } },
+        { "fecha": "23/11", "precios": { "Sodimac": 39990, "Easy": 42990, "Construmart": 44500 } }
+      ]
+    },
+    "esmeril-angular-makita": {
+      "titulo": "Esmeril Angular 4 1/2'' 720W Makita",
+      "marca": "Makita",
+      "categoria": "Herramientas",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 62990,
+      "precio": 49990,
+      "tienda": "Construmart",
+      "imagen": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Esmeril angular compacto de 720W y 11.000 RPM para corte y desbaste en metal y albañilería.",
+      "ofertas": [
+        { "tienda": "Construmart", "precio": 49990, "url": "https://www.construmart.cl/" },
+        { "tienda": "Sodimac", "precio": 52990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Easy", "precio": 54990, "url": "https://www.easy.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Construmart": 58990, "Sodimac": 59990, "Easy": 61990 } },
+        { "fecha": "23/11", "precios": { "Construmart": 49990, "Sodimac": 52990, "Easy": 54990 } }
+      ]
+    },
+    "set-herramientas-stanley": {
+      "titulo": "Set Herramientas Mecánicas 110 Piezas Stanley",
+      "marca": "Stanley",
+      "categoria": "Herramientas",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 79990,
+      "precio": 64990,
+      "tienda": "Easy",
+      "imagen": "https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Juego completo de dados métricos, llaves punta corona, chicharras y puntas en acero cromo vanadio.",
+      "ofertas": [
+        { "tienda": "Easy", "precio": 64990, "url": "https://www.easy.cl/" },
+        { "tienda": "Sodimac", "precio": 68990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Construmart", "precio": 71990, "url": "https://www.construmart.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Easy": 74990, "Sodimac": 76990, "Construmart": 79990 } },
+        { "fecha": "23/11", "precios": { "Easy": 64990, "Sodimac": 68990, "Construmart": 71990 } }
+      ]
+    },
+    "neumatico-bridgestone-205": {
+      "titulo": "Neumático 205/55 R16 Bridgestone Turanza",
+      "marca": "Bridgestone",
+      "categoria": "Vehículos",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 89990,
+      "precio": 74990,
+      "tienda": "Sodimac",
+      "imagen": "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Neumático radial para sedán y hatchback con excelente agarre en pavimento mojado y bajo nivel de ruido.",
+      "ofertas": [
+        { "tienda": "Sodimac", "precio": 74990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Mercado Libre", "precio": 78990, "url": "https://www.mercadolibre.cl/" },
+        { "tienda": "Falabella", "precio": 82990, "url": "https://www.falabella.com/falabella-cl" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Sodimac": 84990, "Mercado Libre": 86990, "Falabella": 89990 } },
+        { "fecha": "23/11", "precios": { "Sodimac": 74990, "Mercado Libre": 78990, "Falabella": 82990 } }
+      ]
+    },
+    "aceite-motor-castrol": {
+      "titulo": "Aceite Motor Sintético 5W-30 Castrol Edge 4L",
+      "marca": "Castrol",
+      "categoria": "Vehículos",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 41990,
+      "precio": 32990,
+      "tienda": "Mercado Libre",
+      "imagen": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Lubricante 100% sintético con tecnología Fluid Titanium para motores bencineros y diésel livianos.",
+      "ofertas": [
+        { "tienda": "Mercado Libre", "precio": 32990, "url": "https://www.mercadolibre.cl/" },
+        { "tienda": "Sodimac", "precio": 35990, "url": "https://www.sodimac.cl/" },
+        { "tienda": "Easy", "precio": 37990, "url": "https://www.easy.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Mercado Libre": 38990, "Sodimac": 39990, "Easy": 41990 } },
+        { "fecha": "23/11", "precios": { "Mercado Libre": 32990, "Sodimac": 35990, "Easy": 37990 } }
+      ]
+    },
+    "compresor-aire-michelin": {
+      "titulo": "Compresor de Aire Digital 12V Michelin",
+      "marca": "Michelin",
+      "categoria": "Vehículos",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 38990,
+      "precio": 29990,
+      "tienda": "Easy",
+      "imagen": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Inflador portátil de neumáticos con manómetro digital retroiluminado y corte automático programable.",
+      "ofertas": [
+        { "tienda": "Easy", "precio": 29990, "url": "https://www.easy.cl/" },
+        { "tienda": "Mercado Libre", "precio": 31500, "url": "https://www.mercadolibre.cl/" },
+        { "tienda": "Sodimac", "precio": 34990, "url": "https://www.sodimac.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Easy": 35990, "Mercado Libre": 36990, "Sodimac": 38990 } },
+        { "fecha": "23/11", "precios": { "Easy": 29990, "Mercado Libre": 31500, "Sodimac": 34990 } }
+      ]
+    },
     "perfume-boss": {
-      "titulo": "BOSS Bottled Eau De Parfum Para Hombre 200 Ml",
+      "titulo": "Perfume Hombre Boss Bottled EDP 200 ml",
+      "marca": "Hugo Boss",
+      "categoria": "Farmacia",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 119990,
       "precio": 84990,
-      "imagen": "https://media.falabella.com/falabellaCL/80013100_1/public",
-      "descripcion": "BOSS Bottled Eau De Parfum Para Hombre 200 Ml",
-      "url": "https://www.falabella.com/falabella-cl/product/80013100/Perfume-Hombre-Boss-Bottled-Eau-De-Parfum-200-Ml/80013100"
+      "tienda": "Falabella",
+      "imagen": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Fragancia masculina amaderada especiada con notas de manzana, canela y vetiver en formato de 200 ml.",
+      "ofertas": [
+        { "tienda": "Falabella", "precio": 84990, "url": "https://www.falabella.com/falabella-cl/product/80013100/Perfume-Hombre-Boss-Bottled-Eau-De-Parfum-200-Ml/80013100" },
+        { "tienda": "Paris", "precio": 89990, "url": "https://www.paris.cl/" },
+        { "tienda": "Ripley", "precio": 92990, "url": "https://simple.ripley.cl/" },
+        { "tienda": "Mercado Libre", "precio": 94500, "url": "https://www.mercadolibre.cl/" },
+        { "tienda": "La Polar", "precio": 96990, "url": "https://www.lapolar.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Falabella": 99990, "Paris": 104990, "Ripley": 109990, "Mercado Libre": 105000, "La Polar": 112990 } },
+        { "fecha": "12/11", "precios": { "Falabella": 89990, "Paris": 94990, "Ripley": 98990, "Mercado Libre": 97990, "La Polar": 99990 } },
+        { "fecha": "23/11", "precios": { "Falabella": 84990, "Paris": 89990, "Ripley": 92990, "Mercado Libre": 94500, "La Polar": 96990 } }
+      ]
+    },
+    "protector-solar-laroche": {
+      "titulo": "Protector Solar Anthelios FPS 50+ 50ml",
+      "marca": "La Roche-Posay",
+      "categoria": "Farmacia",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 25990,
+      "precio": 19990,
+      "tienda": "Cruz Verde",
+      "imagen": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Fluido invisible de muy alta protección UVA/UVB resistente al agua y sudor para piel sensible.",
+      "ofertas": [
+        { "tienda": "Cruz Verde", "precio": 19990, "url": "https://www.cruzverde.cl/" },
+        { "tienda": "Salcobrand", "precio": 21490, "url": "https://salcobrand.cl/" },
+        { "tienda": "Farmacias Ahumada", "precio": 22990, "url": "https://www.farmaciasahumada.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Cruz Verde": 23990, "Salcobrand": 24990, "Farmacias Ahumada": 25990 } },
+        { "fecha": "23/11", "precios": { "Cruz Verde": 19990, "Salcobrand": 21490, "Farmacias Ahumada": 22990 } }
+      ]
+    },
+    "crema-hidratante-cerave": {
+      "titulo": "Loción Hidratante Rostro y Cuerpo 473ml CeraVe",
+      "marca": "CeraVe",
+      "categoria": "Farmacia",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 18990,
+      "precio": 14990,
+      "tienda": "Salcobrand",
+      "imagen": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Loción ligera con 3 ceramidas esenciales y ácido hialurónico para restaurar la barrera protectora de la piel.",
+      "ofertas": [
+        { "tienda": "Salcobrand", "precio": 14990, "url": "https://salcobrand.cl/" },
+        { "tienda": "Cruz Verde", "precio": 15890, "url": "https://www.cruzverde.cl/" },
+        { "tienda": "Farmacias Ahumada", "precio": 16490, "url": "https://www.farmaciasahumada.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Salcobrand": 17990, "Cruz Verde": 18490, "Farmacias Ahumada": 18990 } },
+        { "fecha": "23/11", "precios": { "Salcobrand": 14990, "Cruz Verde": 15890, "Farmacias Ahumada": 16490 } }
+      ]
+    },
+    "plan-movil-5g-200gb": {
+      "titulo": "Plan Móvil 5G 200 GB + Minutos Libres",
+      "marca": "Telecomunicaciones",
+      "categoria": "Servicios",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 16990,
+      "precio": 11990,
+      "tienda": "WOM",
+      "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Plan portabilidad mensual con 200 GB navegación 5G, redes sociales libres y 1.000 minutos a todo destino.",
+      "ofertas": [
+        { "tienda": "WOM", "precio": 11990, "url": "https://www.wom.cl/" },
+        { "tienda": "Entel", "precio": 12990, "url": "https://www.entel.cl/" },
+        { "tienda": "Movistar", "precio": 13990, "url": "https://ww2.movistar.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "WOM": 13990, "Entel": 14990, "Movistar": 15990 } },
+        { "fecha": "23/11", "precios": { "WOM": 11990, "Entel": 12990, "Movistar": 13990 } }
+      ]
+    },
+    "pasaje-santiago-puertomontt": {
+      "titulo": "Pasaje Aéreo Ida y Vuelta Santiago - Puerto Montt",
+      "marca": "Vuelos Nacionales",
+      "categoria": "Servicios",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 54990,
+      "precio": 38990,
+      "tienda": "Sky Airline",
+      "imagen": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Tarifa Light ida y vuelta con bolso de mano incluido y tasas de embarque para vuelos directos desde Santiago.",
+      "ofertas": [
+        { "tienda": "Sky Airline", "precio": 38990, "url": "https://www.skyairline.com/chile" },
+        { "tienda": "JetSMART", "precio": 41500, "url": "https://jetsmart.com/cl/es/" },
+        { "tienda": "LATAM", "precio": 44990, "url": "https://www.latamairlines.com/cl/es" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Sky Airline": 46990, "JetSMART": 48990, "LATAM": 52990 } },
+        { "fecha": "23/11", "precios": { "Sky Airline": 38990, "JetSMART": 41500, "LATAM": 44990 } }
+      ]
+    },
+    "entrada-festival-musica": {
+      "titulo": "Entrada General Festival Música Santiago 2026",
+      "marca": "Eventos & Espectáculos",
+      "categoria": "Servicios",
+      "condicion": "Nuevo",
+      "destacado": false,
+      "precioNormal": 55000,
+      "precio": 45000,
+      "tienda": "PuntoTicket",
+      "imagen": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Pase general preventivo para jornada completa con acceso a todos los escenarios y zonas de comida.",
+      "ofertas": [
+        { "tienda": "PuntoTicket", "precio": 45000, "url": "https://www.puntoticket.com/" },
+        { "tienda": "Passline", "precio": 46500, "url": "https://www.passline.com/" },
+        { "tienda": "Ticketmaster", "precio": 48900, "url": "https://www.ticketmaster.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "PuntoTicket": 45000, "Passline": 46500, "Ticketmaster": 48900 } },
+        { "fecha": "23/11", "precios": { "PuntoTicket": 45000, "Passline": 46500, "Ticketmaster": 48900 } }
+      ]
+    },
+    "bicicleta-paseo-aro-26": {
+      "titulo": "Bicicleta de Paseo Aro 26 Vintage Buen Estado",
+      "marca": "Oxford",
+      "categoria": "Usados",
+      "condicion": "Usado",
+      "destacado": false,
+      "precioNormal": 65000,
+      "precio": 45000,
+      "tienda": "Yapo",
+      "imagen": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Bicicleta urbana aro 26 usada con canasto delantero, tapabarros metálicos y mantención recién hecha.",
+      "ofertas": [
+        { "tienda": "Yapo", "precio": 45000, "url": "https://www.yapo.cl/" },
+        { "tienda": "Facebook Marketplace", "precio": 47500, "url": "https://www.facebook.com/marketplace/" },
+        { "tienda": "Mercado Libre Usados", "precio": 49000, "url": "https://www.mercadolibre.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Yapo": 52000, "Facebook Marketplace": 55000, "Mercado Libre Usados": 58000 } },
+        { "fecha": "23/11", "precios": { "Yapo": 45000, "Facebook Marketplace": 47500, "Mercado Libre Usados": 49000 } }
+      ]
+    },
+    "iphone-13-128gb-usado": {
+      "titulo": "Apple iPhone 13 128GB Liberado (Batería 89%)",
+      "marca": "Apple",
+      "categoria": "Usados",
+      "condicion": "Usado",
+      "destacado": false,
+      "precioNormal": 360000,
+      "precio": 295000,
+      "tienda": "Yapo",
+      "imagen": "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Equipo usado sin detalles estéticos, liberado para todas las compañías, incluye cable original y carcasa.",
+      "ofertas": [
+        { "tienda": "Yapo", "precio": 295000, "url": "https://www.yapo.cl/" },
+        { "tienda": "Facebook Marketplace", "precio": 305000, "url": "https://www.facebook.com/marketplace/" },
+        { "tienda": "Mercado Libre Usados", "precio": 319990, "url": "https://www.mercadolibre.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Yapo": 325000, "Facebook Marketplace": 335000, "Mercado Libre Usados": 349990 } },
+        { "fecha": "23/11", "precios": { "Yapo": 295000, "Facebook Marketplace": 305000, "Mercado Libre Usados": 319990 } }
+      ]
+    },
+    "consola-ps4-slim-usada": {
+      "titulo": "Consola PlayStation 4 Slim 500GB + 2 Controles",
+      "marca": "Sony",
+      "categoria": "Usados",
+      "condicion": "Usado",
+      "destacado": false,
+      "precioNormal": 195000,
+      "precio": 155000,
+      "tienda": "Facebook Marketplace",
+      "imagen": "https://images.unsplash.com/photo-1507457379470-08b800bebc67?auto=format&fit=crop&w=500&q=80",
+      "descripcion": "Consola segunda mano probada y funcionando al 100%, incluye 2 mandos DualShock 4 y cables HDMI/corriente.",
+      "ofertas": [
+        { "tienda": "Facebook Marketplace", "precio": 155000, "url": "https://www.facebook.com/marketplace/" },
+        { "tienda": "Yapo", "precio": 160000, "url": "https://www.yapo.cl/" },
+        { "tienda": "Mercado Libre Usados", "precio": 175000, "url": "https://www.mercadolibre.cl/" }
+      ],
+      "historial": [
+        { "fecha": "01/11", "precios": { "Facebook Marketplace": 175000, "Yapo": 180000, "Mercado Libre Usados": 189990 } },
+        { "fecha": "23/11", "precios": { "Facebook Marketplace": 155000, "Yapo": 160000, "Mercado Libre Usados": 175000 } }
+      ]
     }
   }
 }
