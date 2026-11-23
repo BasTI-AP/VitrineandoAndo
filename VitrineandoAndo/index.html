@@ -22,7 +22,6 @@
 		<!-- Contenedor del título -->
 		<div class="d-inline-flex flex-column align-items-center mb-3">
 			<img src="logo.png" alt="VitrineandoAndo" class="img-fluid mb-2" style="max-height: 200px;">
-
 		</div>
 
 		<!-- Navbar -->
@@ -35,16 +34,16 @@
 				<div class="collapse navbar-collapse" id="menuNavegacion">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
 						<li class="nav-item">
-							<a class="nav-link active" id="btn-nav-inicio" href="#" onclick="mostrarSeccion('inicio', this)">Inicio</a>
+							<a class="nav-link active" id="btn-nav-inicio" href="#" onclick="mostrarSeccion('inicio', this); return false;">Inicio</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="btn-nav-categorias" href="#" onclick="mostrarSeccion('categorias', this)">Categorías</a>
+							<a class="nav-link" id="btn-nav-categorias" href="#" onclick="mostrarSeccion('categorias', this); return false;">Categorías</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="btn-nav-ofertas" href="#" onclick="mostrarSeccion('ofertas', this)">Ofertas</a>
+							<a class="nav-link" id="btn-nav-ofertas" href="#" onclick="mostrarSeccion('ofertas', this); return false;">Ofertas</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="btn-nav-contacto" href="#" onclick="mostrarSeccion('contacto', this)">Contacto</a>
+							<a class="nav-link" id="btn-nav-contacto" href="#" onclick="mostrarSeccion('contacto', this); return false;">Contacto</a>
 						</li>
 					</ul>
 
@@ -57,7 +56,6 @@
 		</nav>
 
 		<!-- ===================== SUB-SECCION: RESULTADOS DE BUSQUEDA ==================== -->
-		
 		<section id="seccion-busqueda" class="container my-5 d-none">
 			<div class="p-4 rounded-4 bg-dark bg-opacity-75 border border-warning shadow-lg">
 				
@@ -76,10 +74,6 @@
 			</div>
 		</section>
 
-
-
-		
-
 		<!-- ================= SECCIÓN 1: INICIO ================= -->
 		<div id="seccion-inicio">
 
@@ -88,7 +82,7 @@
 				
 				<div class="carousel-indicators">
 					<button type="button" onclick="irASlide(0)" class="active" aria-label="Slide 1"></button>
-					<button type="button" onclick="irASlide(1)" aria-label="Slide 2"></button>
+					<button type="button" onclick="irASlide(1)" class="active" aria-label="Slide 2"></button>
 					<button type="button" onclick="irASlide(2)" aria-label="Slide 3"></button>
 				</div>
 
@@ -209,8 +203,6 @@
 			</div>
 		</section>
 
-		
-
 		<!-- ================= SECCIÓN 3: OFERTAS ================= -->
 		<div id="seccion-ofertas" class="seccion-oculta mb-5">
 			<div class="card shadow-sm border-0 p-3 bg-white rounded-4 text-center">
@@ -220,26 +212,65 @@
 			</div>
 		</div>
 
-		<!-- ================= PRODUCTO BOSQUEJO ================= -->
+		<!-- ================= PRODUCTO DETALLE (COMPARADOR 5 TIENDAS + GRÁFICO) ================= -->
 		<div id="seccion-detalle-producto" class="seccion-oculta mb-5">
-			<div class="card shadow-sm border-0 p-4 p-md-5 bg-white rounded-4">
-				<div class="row align-items-center">
-				<!-- Columna Izquierda: Imagen del producto -->
-					<div class="col-md-5 text-center mb-4 mb-md-0">
-						<img id="detalle-img" src="https://ellaelperfum.cl/wp-content/uploads/2026/07/132-Terre-dHermes-Hermes-.jpg" alt="Detalle del Producto" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto;">
+			<div class="card shadow-lg border-0 p-4 p-md-5 bg-white rounded-4">
+
+				<!-- Encabezado superior con título en mayúsculas y botón volver -->
+				<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4 pb-3 border-bottom">
+					<div>
+						<div class="mb-1">
+							<span id="detalle-marca" class="badge bg-dark text-uppercase me-1">Marca</span>
+							<span id="detalle-categoria" class="badge bg-warning text-dark">Categoría</span>
+							<small id="detalle-actualizacion" class="text-muted ms-2"></small>
+						</div>
+						<h2 id="detalle-titulo" class="fw-bolder text-dark text-uppercase mb-0" style="letter-spacing: 0.5px;">
+							Cargando producto...
+						</h2>
+					</div>
+					<button class="btn btn-outline-secondary btn-sm" onclick="mostrarSeccion('ofertas', document.getElementById('btn-nav-ofertas'))">
+						← Volver a Ofertas
+					</button>
+				</div>
+
+				<!-- 3 Columnas: Imagen y Datos | Tabla 5 Tiendas | Gráfico Historial -->
+				<div class="row g-4 align-items-stretch">
+
+					<!-- Columna Izquierda: Imagen y descripción del producto -->
+					<div class="col-12 col-lg-3 d-flex flex-column">
+						<div class="bg-light rounded-4 p-3 text-center mb-3 d-flex align-items-center justify-content-center" style="min-height: 230px;">
+							<img id="detalle-img" src="https://ellaelperfum.cl/wp-content/uploads/2026/07/132-Terre-dHermes-Hermes-.jpg" alt="Detalle del Producto" class="img-fluid rounded" style="max-height: 200px; width: auto; object-fit: contain;">
+						</div>
+						<h6 class="fw-bold text-dark mb-1">Descripción del producto</h6>
+						<p id="detalle-descripcion" class="text-secondary small mb-0" style="line-height: 1.6;">
+							Cargando descripción...
+						</p>
 					</div>
 
-					<!-- Columna Derecha: Título, Precio y Descripción -->
-					<div class="col-md-7">
-						<h2 id="detalle-titulo" class="fw-bold text-dark mb-3">Inspirado en Terre d'Hermès Hermès M#132</h2>
-						<h3 id="detalle-precio" class="text-success fw-bold display-6 mb-4">$24.990</h3>
-						<p id="detalle-descripcion" class="text-secondary" style="line-height: 1.7;">
-							Terre d'Hermès de Hermès es una fragancia de la familia olfativa Amaderada Especiada...
-						</p>
-						<button class="btn btn-outline-secondary mt-3" onclick="mostrarSeccion('ofertas', document.getElementById('btn-nav-ofertas'))">
-							← Volver a Ofertas
-						</button>
+					<!-- Columna Central: Comparador de 5 tiendas (estilo boceto) -->
+					<div class="col-12 col-lg-5">
+						<div class="comparador-card h-100 d-flex flex-column justify-content-between">
+							<div id="comparador-logos-header" class="comparador-header d-flex flex-wrap justify-content-around align-items-center gap-2 px-3 py-3 border-bottom"></div>
+							<div id="lista-tiendas-comparador" class="flex-grow-1 d-flex flex-column justify-content-center"></div>
+						</div>
 					</div>
+
+					<!-- Columna Derecha: Gráfico de evolución de precios -->
+					<div class="col-12 col-lg-4">
+						<div class="border rounded-4 p-3 h-100 d-flex flex-column bg-light bg-opacity-50">
+							<div class="d-flex justify-content-between align-items-center mb-2">
+								<h6 class="fw-bold text-dark mb-0">📈 Historial de precios</h6>
+								<span class="badge bg-secondary-subtle text-dark border" style="font-size: 0.7rem;">Bot Scraping</span>
+							</div>
+							<small class="text-muted mb-3" style="font-size: 0.75rem;">
+								Cambios registrados cada vez que el bot revisa las tiendas.
+							</small>
+							<div class="position-relative flex-grow-1" style="min-height: 250px;">
+								<canvas id="grafico-historial-precios"></canvas>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -297,8 +328,13 @@
 			</div>
 		</div>
 
+	</div>
+
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<!-- Chart.js para gráfico de historial de precios -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 
 	<!-- Tu archivo JavaScript -->
 	<script src="script.js"></script>
