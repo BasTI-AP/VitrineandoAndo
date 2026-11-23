@@ -49,14 +49,113 @@ function mostrarSeccion(nombreSeccion, elementoNav) {
 	}
 }
 
-/* ================= CARGAR PRODUCTO EXTERNO ================= */
+/* ================= CARGAR PRODUCTO EXTERNO (5 TIENDAS + GRÁFICO) ================= */
+let instanciaGraficoPrecios = null;
+
+function obtenerClaseLogoTienda(nombreTienda) {
+	const clave = normalizarTexto(nombreTienda).replace(/\s+/g, '');
+	if (clave.includes('falabella')) return 'logo-falabella';
+	if (clave.includes('paris')) return 'logo-paris';
+	if (clave.includes('ripley')) return 'logo-ripley';
+	if (clave.includes('mercadolibre')) return 'logo-mercadolibre';
+	if (clave.includes('lapolar')) return 'logo-lapolar';
+	return 'logo-default';
+}
+
+function renderizarGraficoHistorial(historial, ofertasActuales) {
+	const canvas = document.getElementById('grafico-historial-precios');
+	if (!canvas || typeof Chart === 'undefined') return;
+
+	if (instanciaGraficoPrecios) {
+		instanciaGraficoPrecios.destroy();
+	}
+
+	const coloresTienda = {
+		'Falabella': '#8db600',
+		'Paris': '#006ce0',
+		'Ripley': '#6a1b9a',
+		'Mercado Libre': '#e6b800',
+		'La Polar': '#d50000'
+	};
+
+	const registros = (Array.isArray(historial) && historial.length > 0)
+		? historial
+		: [{
+			fecha: 'Actual',
+			precios: Object.fromEntries(ofertasActuales.map(o => [o.tienda, o.precio]))
+		}];
+
+	const etiquetasFechas = registros.map(r => r.fecha);
+	const tiendasUnicas = [...new Set(ofertasActuales.map(o => o.tienda))];
+
+	const datasets = tiendasUnicas.map(tienda => ({
+		label: tienda,
+		data: registros.map(r => (r.precios && r.precios[tienda] !== undefined) ? r.precios[tienda] : null),
+		borderColor: coloresTienda[tienda] || '#333333',
+		backgroundColor: coloresTienda[tienda] || '#333333',
+		borderWidth: 2.5,
+		pointRadius: 4,
+		pointHoverRadius: 6,
+		tension: 0.25,
+		spanGaps: true
+	}));
+
+	instanciaGraficoPrecios = new Chart(canvas, {
+		type: 'line',
+		data: {
+			labels: etiquetasFechas,
+			datasets: datasets
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			interaction: {
+				mode: 'index',
+				intersect: false
+			},
+			plugins: {
+				legend: {
+					position: 'bottom',
+					labels: {
+						boxWidth: 12,
+						font: { size: 11 }
+					}
+				},
+				tooltip: {
+					callbacks: {
+						label: (ctx) => {
+							if (ctx.parsed.y === null) return `${ctx.dataset.label}: Sin datos`;
+							return `${ctx.dataset.label}: $${Number(ctx.parsed.y).toLocaleString('es-CL')}`;
+						}
+					}
+				}
+			},
+			scales: {
+				x: {
+					ticks: { font: { size: 10 }, maxRotation: 35 }
+				},
+				y: {
+					ticks: {
+						font: { size: 10 },
+						callback: (val) => '$' + Number(val).toLocaleString('es-CL')
+					}
+				}
+			}
+		}
+	});
+}
+
 async function abrirProducto(idProducto) {
 	mostrarSeccion('detalle-producto', null);
 
 	const imgEl = document.getElementById('detalle-img');
 	const tituloEl = document.getElementById('detalle-titulo');
-	const precioEl = document.getElementById('detalle-precio');
 	const descEl = document.getElementById('detalle-descripcion');
+	const marcaEl = document.getElementById('detalle-marca');
+	const catEl = document.getElementById('detalle-categoria');
+	const actEl = document.getElementById('detalle-actualizacion');
+	const headerLogos = document.getElementById('comparador-logos-header');
+	const listaTiendas = document.getElementById('lista-tiendas-comparador');
 
 	try {
 		// El parámetro ?t= evita que el navegador use una versión vieja en caché
@@ -71,13 +170,50 @@ async function abrirProducto(idProducto) {
 		imgEl.src = producto.imagen;
 		imgEl.style.display = 'inline-block';
 		tituloEl.textContent = producto.titulo;
-		precioEl.textContent = '$' + Number(producto.precio).toLocaleString('es-CL');
-		descEl.textContent = producto.descripcion;
+		descEl.textContent = producto.descripcion || 'Comparativa automática de precios en las principales tiendas de Chile.';
+		marcaEl.textContent = producto.marca || 'Destacado';
+		catEl.textContent = producto.categoria || 'Catálogo';
+		actEl.textContent = producto.ultimaActualizacion ? `Último scraping: ${producto.ultimaActualizacion}` : '';
+
+		// Obtener hasta 5 tiendas ordenadas de menor a mayor precio
+		let ofertas = Array.isArray(producto.ofertas) && producto.ofertas.length > 0
+			? [...producto.ofertas]
+			: [{ tienda: producto.tienda || 'Falabella', precio: Number(producto.precio || 0), url: producto.url }];
+
+		ofertas.sort((a, b) => a.precio - b.precio);
+		ofertas = ofertas.slice(0, 5);
+
+		// Cabecera con logos de las tiendas
+		headerLogos.innerHTML = ofertas.map(o => `
+			<span class="logo-tienda ${obtenerClaseLogoTienda(o.tienda)}">${o.tienda}</span>
+		`).join('');
+
+		// Filas de comparación estilo boceto
+		listaTiendas.innerHTML = ofertas.map((oferta, index) => {
+			const esMejor = index === 0;
+			const precioFormateado = '$' + Number(oferta.precio).toLocaleString('es-CL');
+
+			return `
+				<div class="fila-tienda ${esMejor ? 'fila-mejor-opcion' : ''}">
+					<div class="d-flex align-items-center gap-2 flex-wrap">
+						${!esMejor ? `<span class="logo-tienda ${obtenerClaseLogoTienda(oferta.tienda)}">${oferta.tienda}</span>` : ''}
+						<span class="fs-5 fw-bolder text-dark">${precioFormateado}</span>
+						${esMejor ? `<span class="badge-mejor-opcion">MEJOR OPCIÓN</span>` : ''}
+					</div>
+					<a href="${oferta.url}" target="_blank" rel="noopener noreferrer" class="btn-ir-tienda">
+						Ir a Tienda
+					</a>
+				</div>
+			`;
+		}).join('');
+
+		// Dibujar gráfico con los cambios registrados por el bot
+		renderizarGraficoHistorial(producto.historial, ofertas);
 
 	} catch (error) {
 		tituloEl.textContent = 'Error al cargar el producto';
-		precioEl.textContent = '---';
-		descEl.textContent = 'Abre la página desde GitHub Pages o un servidor local (Live Server).';
+		descEl.textContent = 'Abre la página desde GitHub Pages/Vercel o un servidor local (Live Server).';
+		listaTiendas.innerHTML = '';
 		console.error(error);
 	}
 }
@@ -197,12 +333,14 @@ async function buscarProductos(termino) {
 		const respuesta = await fetch(`productos.json?v=${Date.now()}`);
 		if (respuesta.ok) {
 			const data = await respuesta.json();
-			const listaJson = Object.values(data.productos || {}).map(p => ({
-				etiqueta: 'Falabella',
+			const listaJson = Object.entries(data.productos || {}).map(([id, p]) => ({
+				id: id,
+				etiqueta: p.tienda || 'Falabella',
 				titulo: p.titulo,
 				precio: `$${Number(p.precio || 0).toLocaleString('es-CL')}`,
 				imagen: p.imagen,
-				url: p.url
+				url: p.url,
+				esDetalleInterno: true
 			}));
 			catalogoUnificado = catalogoUnificado.concat(listaJson);
 		}
@@ -217,7 +355,8 @@ async function buscarProductos(termino) {
 			titulo: `${p.marca} - ${p.nombre}`,
 			precio: p.precioOferta,
 			imagen: p.imagen,
-			url: p.url
+			url: p.url,
+			esDetalleInterno: false
 		}));
 		catalogoUnificado = catalogoUnificado.concat(listaSuper);
 	}
@@ -250,9 +389,10 @@ async function buscarProductos(termino) {
 						<h5 class="card-title fw-bold text-dark fs-6 mt-1">${prod.titulo}</h5>
 						<div class="mt-auto pt-3">
 							<div class="fs-4 fw-bolder text-dark mb-2">${prod.precio}</div>
-							<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">
-								Ver producto
-							</a>
+							${prod.esDetalleInterno
+								? `<button type="button" class="btn btn-warning w-100 fw-bold" onclick="cerrarBusqueda(); abrirProducto('${prod.id}');">Comparar precios</button>`
+								: `<a href="${prod.url}" target="_blank" rel="noopener noreferrer" class="btn btn-warning w-100 fw-bold">Ver producto</a>`
+							}
 						</div>
 					</div>
 				</div>
@@ -282,8 +422,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 });
-//Enviar Formulario
 
+// Enviar Formulario de Contacto
 function enviarFormularioContacto(event) {
 	event.preventDefault();
 	const alerta = document.getElementById('alerta-contacto');
