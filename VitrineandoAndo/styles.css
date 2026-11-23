@@ -1,124 +1,129 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
 }
 
 body {
-	/* background-color: #E5E5E5;  */
+	background-color: #1C1D21;
 	background-image: url("fondo.jpeg");
-    background-size: cover;        /* Cubre toda la pantalla sin deformar la imagen */
-    background-position: center top;   /* Mantiene la imagen centrada */
-    background-repeat: no-repeat;  /* Evita que se repita como mosaico */
-    background-attachment: scroll;  /* Deja el fondo fijo mientras haces scroll */
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
 }
 
 .bg-night {
-	background-color: #252850 !important; 
+	background-color: #252850 !important;
 }
 
-.titulo-intercalado {
-	font-family: 'Black Ops One', cursive !important;
+.text-purpura {
+	color: #492282 !important;
 }
 
-/* Púrpura */
-.titulo-intercalado span:nth-child(odd) {
-	color: #6C5CE7;
-	text-shadow: 3px 3px 6px rgba(45, 20, 90, 0.4);
+/* Foco accesible para navegación con teclado (Tab / Enter - RNF-03) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 3px solid #F39C12 !important;
+	outline-offset: 2px;
 }
 
-/* Naranja claro */
-.titulo-intercalado span:nth-child(even) {
-	color: #F39C12;
-	text-shadow: 3px 3px 6px rgba(150, 75, 0, 0.4);
-}
-
-.subtitulo-marca {
-	margin-top: -12px;
-	font-size: 0.95rem;
-	color: #6c757d;
-	letter-spacing: 1.5px;
-	text-transform: uppercase;
-	font-weight: 500;
-}
-
-/* Estilos para la Sección Categorías (los cuadraos) */
+/* Tarjetas de las 8 Categorías */
 .card-categoria-full {
 	background: #ffffff;
-	border: 1px solid #e2e8f0;
+	border: 2px solid #e2e8f0;
 	border-radius: 14px;
 	text-align: center;
-	padding: 30px 15px;
+	padding: 28px 15px;
 	text-decoration: none;
 	color: #1e293b;
-	transition: all 0.25s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-.card-categoria-full:hover {
+.card-categoria-full:hover,
+.card-categoria-full:focus {
 	border-color: #6C5CE7;
-	transform: translateY(-5px);
-	box-shadow: 0 12px 24px rgba(108, 92, 231, 0.18);
-	color: #6C5CE7;
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(108, 92, 231, 0.25);
+	color: #492282;
 }
 
 .card-categoria-full span.icono {
 	font-size: 42px;
 	display: block;
-	margin-bottom: 12px;
+	margin-bottom: 10px;
 }
 
 .card-categoria-full span.texto {
 	font-size: 0.85rem;
-	font-weight: 700;
+	font-weight: 800;
 	letter-spacing: 0.8px;
 }
 
-/* Clase para ocultar secciones desactivadas */
 .seccion-oculta {
 	display: none !important;
 }
 
-/* Alerta de confirmación en la sección de Contacto */
+/* Alerta de confirmación en Contacto */
 #alerta-contacto {
-    background-color: #d1e7dd;
-    color: #0f5132;
-    border: 1px solid #a3cfbb;
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15);
-    animation: aparecerAlerta 0.3s ease-out;
+	background-color: #d1e7dd;
+	color: #0f5132;
+	border: 1px solid #a3cfbb;
+	border-radius: 12px;
+	padding: 12px 16px;
+	font-size: 0.95rem;
+	font-weight: 600;
+	animation: aparecerAlerta 0.3s ease-out;
 }
 
 @keyframes aparecerAlerta {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	from { opacity: 0; transform: translateY(-6px); }
+	to { opacity: 1; transform: translateY(0); }
 }
 
-/* ================= COMPARADOR DE 5 TIENDAS (ESTILO BOCETO) ================= */
+/* ================= ETIQUETAS DE ESTADO: NUEVO / USADO (RF-05) ================= */
+.badge-condicion {
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.5px;
+	padding: 4px 10px;
+	border-radius: 50px;
+	text-transform: uppercase;
+}
+
+.condicion-nuevo {
+	background-color: #d1fae5;
+	color: #065f46;
+	border: 1px solid #6ee7b7;
+}
+
+.condicion-usado {
+	background-color: #fef3c7;
+	color: #78350f;
+	border: 1px solid #f59e0b;
+}
+
+/* ================= COMPARADOR DE TIENDAS (RF-06, RF-10) ================= */
 .comparador-card {
-	border: 1px solid #e2e8f0;
+	border: 1px solid #cbd5e1;
 	border-radius: 16px;
 	background-color: #ffffff;
 	overflow: hidden;
-	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
 .comparador-header {
-	background-color: #fafafa;
+	background-color: #f8fafc;
 }
 
 .fila-tienda {
@@ -127,8 +132,7 @@ body {
 	justify-content: space-between;
 	gap: 8px;
 	padding: 12px 16px;
-	border-bottom: 1px solid #edf2f7;
-	transition: background-color 0.2s ease;
+	border-bottom: 1px solid #e2e8f0;
 }
 
 .fila-tienda:last-child {
@@ -140,7 +144,7 @@ body {
 }
 
 .badge-mejor-opcion {
-	background-color: #2cc5b8;
+	background-color: #0f766e;
 	color: #ffffff;
 	font-size: 0.68rem;
 	font-weight: 800;
@@ -173,16 +177,22 @@ body {
 	align-items: center;
 	justify-content: center;
 	font-weight: 800;
-	font-size: 0.78rem;
+	font-size: 0.76rem;
 	padding: 4px 10px;
 	border-radius: 6px;
 	min-width: 96px;
 	text-align: center;
 }
 
-.logo-falabella { background-color: #aad500; color: #ffffff; }
-.logo-paris { background-color: #006ce0; color: #ffffff; }
+.logo-falabella { background-color: #5a7800; color: #ffffff; }
+.logo-paris { background-color: #005bb5; color: #ffffff; }
 .logo-ripley { background-color: #6a1b9a; color: #ffffff; }
-.logo-mercadolibre { background-color: #ffe600; color: #2d3277; }
-.logo-lapolar { background-color: #d50000; color: #ffffff; }
-.logo-default { background-color: #212529; color: #ffffff; }
+.logo-mercadolibre { background-color: #ffe600; color: #1e2256; }
+.logo-lapolar { background-color: #c40000; color: #ffffff; }
+.logo-dafiti { background-color: #111827; color: #ffffff; }
+.logo-sodimac { background-color: #004b93; color: #ffffff; }
+.logo-easy { background-color: #b91c1c; color: #ffffff; }
+.logo-lider { background-color: #00539b; color: #ffffff; }
+.logo-jumbo { background-color: #15803d; color: #ffffff; }
+.logo-yapo { background-color: #c2410c; color: #ffffff; }
+.logo-default { background-color: #1f2937; color: #ffffff; }
