@@ -530,11 +530,34 @@ buscarProductos(input ? input.value : '');
 });
 }
 
+const btnToggler = document.querySelector('.navbar-toggler');
+const menuNav = document.getElementById('menuNavegacion');
+
+function cerrarMenuMovil() {
+if (!menuNav) return;
+if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+const instancia = bootstrap.Collapse.getInstance(menuNav);
+if (instancia) instancia.hide();
+} else {
+menuNav.classList.remove('show');
+if (btnToggler) btnToggler.setAttribute('aria-expanded', 'false');
+}
+}
+
+if (btnToggler && menuNav) {
+btnToggler.addEventListener('click', () => {
+if (typeof bootstrap === 'undefined') {
+menuNav.classList.toggle('show');
+btnToggler.setAttribute('aria-expanded', menuNav.classList.contains('show'));
+}
+});
+}
+
 document.querySelectorAll('.navbar-nav .nav-link').forEach(enlace => {
 enlace.addEventListener('click', () => {
 cerrarBusqueda();
 cerrarSubcategoria();
-});
+cerrarMenuMovil();
 });
 });
 
