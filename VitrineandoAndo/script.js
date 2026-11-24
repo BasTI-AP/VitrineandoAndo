@@ -519,55 +519,57 @@ renderizarGraficoHistorial(producto.historial, ofertas);
 
 /* ================= INICIALIZACIÓN Y FORMULARIO DE CONTACTO ================= */
 document.addEventListener('DOMContentLoaded', () => {
-cargarDestacadosInicio(false);
+	cargarDestacadosInicio(false);
 
-const formBuscador = document.getElementById('form-buscador');
-if (formBuscador) {
-formBuscador.addEventListener('submit', (e) => {
-e.preventDefault();
-const input = document.getElementById('input-buscador');
-buscarProductos(input ? input.value : '');
-});
-}
+	const btnToggler = document.querySelector('.navbar-toggler');
+	const menuNav = document.getElementById('menuNavegacion');
 
-const btnToggler = document.querySelector('.navbar-toggler');
-const menuNav = document.getElementById('menuNavegacion');
+	function cerrarMenuMovil() {
+		if (!menuNav) return;
+		if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+			const instancia = bootstrap.Collapse.getInstance(menuNav);
+			if (instancia) instancia.hide();
+		} else {
+			menuNav.classList.remove('show');
+			if (btnToggler) btnToggler.setAttribute('aria-expanded', 'false');
+		}
+	}
 
-function cerrarMenuMovil() {
-if (!menuNav) return;
-if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
-const instancia = bootstrap.Collapse.getInstance(menuNav);
-if (instancia) instancia.hide();
-} else {
-menuNav.classList.remove('show');
-if (btnToggler) btnToggler.setAttribute('aria-expanded', 'false');
-}
-}
+	if (btnToggler && menuNav) {
+		btnToggler.addEventListener('click', () => {
+			if (typeof bootstrap === 'undefined') {
+				menuNav.classList.toggle('show');
+				btnToggler.setAttribute('aria-expanded', menuNav.classList.contains('show'));
+			}
+		});
+	}
 
-if (btnToggler && menuNav) {
-btnToggler.addEventListener('click', () => {
-if (typeof bootstrap === 'undefined') {
-menuNav.classList.toggle('show');
-btnToggler.setAttribute('aria-expanded', menuNav.classList.contains('show'));
-}
-});
-}
+	const formBuscador = document.getElementById('form-buscador');
+	if (formBuscador) {
+		formBuscador.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const input = document.getElementById('input-buscador');
+			buscarProductos(input ? input.value : '');
+			cerrarMenuMovil();
+		});
+	}
 
-document.querySelectorAll('.navbar-nav .nav-link').forEach(enlace => {
-enlace.addEventListener('click', () => {
-cerrarBusqueda();
-cerrarSubcategoria();
-cerrarMenuMovil();
-});
+	document.querySelectorAll('.navbar-nav .nav-link').forEach(enlace => {
+		enlace.addEventListener('click', () => {
+			cerrarBusqueda();
+			cerrarSubcategoria();
+			cerrarMenuMovil();
+		});
+	});
 });
 
 function enviarFormularioContacto(event) {
-event.preventDefault();
-const alerta = document.getElementById('alerta-contacto');
-alerta.classList.remove('d-none');
-event.target.reset();
+	event.preventDefault();
+	const alerta = document.getElementById('alerta-contacto');
+	if (alerta) alerta.classList.remove('d-none');
+	event.target.reset();
 
-setTimeout(() => {
-alerta.classList.add('d-none');
-}, 4500);
+	setTimeout(() => {
+		if (alerta) alerta.classList.add('d-none');
+	}, 4500);
 }
