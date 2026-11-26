@@ -1,20 +1,18 @@
-name: Actualizar Precios Falabella
+name: Bot Scraper Multi-Tienda
 
 on:
   schedule:
-    # Corre a las 11 PM, 3 AM, 5 AM, 12 PM, 4 PM y 8 PM (hora de Chile)
-    - cron: '0 2,6,8,15,19,23 * * *'
+    - cron: '0 */6 * * *' 
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  scrap:
+  scrapear:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Descargar código del repositorio
+      - name: Descargar repositorio
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
@@ -22,17 +20,18 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar dependencias del scraper
-        working-directory: ./VitrineandoAndo/backend
-        run: npm install
+      - name: Instalar dependencias y Playwright
+        run: |
+          npm install
+          npx playwright install chromium
 
-      - name: Ejecutar scraping y generar productos.json
-        working-directory: ./VitrineandoAndo/backend
+      - name: Ejecutar bot en las 5 tiendas
         run: node scraper-batch.js
 
-      - name: Guardar cambios en el repositorio
+      - name: Guardar cambios en productos.json
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add VitrineandoAndo/productos.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar precios automáticamente" && git push)
+          git add productos.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Bot: precios actualizados"
+          git push
